@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Student Dashboard</h2>
+  <h3>Your Courses</h3>
+  <ul>
+    {% for enrollment in enrollments %}
+      <li>{{ enrollment.course.name }} - <a href="{{ url_for('student.submit_assignment', assignment_id=1) }}">Submit Assignment</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

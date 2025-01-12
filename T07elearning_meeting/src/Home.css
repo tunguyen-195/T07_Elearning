@@ -1,0 +1,146 @@
+/* Home.css */
+
+/* Color Variables */
+:root {
+  --color-primary: #4f77ff;
+  --color-hover: #486ff2;
+  --color-heading: #2d385e;
+  --color-body-text: #44525f;
+  --color-panel-left: rgba(12, 14, 33, 0.9);
+  --color-panel-right: #ffffff;
+  --color-background: #f0f2f5;
+  --color-border: #bcc2ce;
+  --color-shadow-light: #9c9c9c;
+  --color-shadow-dark: #1d2030;
+  --color-text-secondary: #666666;
+  --color-input-text: #333333;
+}
+
+/* Global Styles */
+body,
+html,
+#root {
+  height: 100%;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-body-text);
+}
+
+/* Container */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Header */
+.home-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-panel-right);
+  padding: 10px 0;
+  box-shadow: 0 2px 4px var(--color-shadow-light);
+}
+
+.home-title {
+  font-size: 16px;
+  color: var(--color-heading);
+  margin-right: 10px;
+}
+
+.home-logo {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+/* Main Content */
+.home-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Intro Section */
+.home-intro {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.home-heading {
+  font-size: 45px;
+  color: var(--color-heading);
+  margin: 0 0 10px 0;
+}
+
+.home-subtext {
+  font-weight: 200;
+  color: var(--color-body-text);
+  margin: 0;
+}
+
+/* Panel Section */
+.home-panel {
+  background-color: var(--color-panel-right);
+  width: 100%;
+  max-width: 400px;
+  padding: 30px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px var(--color-shadow-light);
+  text-align: center;
+}
+
+.panel-title {
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  color: var(--color-heading);
+}
+
+.home-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 16px;
+  color: var(--color-input-text);
+}
+
+.home-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.home-button {
+  width: 100%;
+  padding: 10px 0;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: var(--color-hover);
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .home-panel {
+    padding: 20px 15px;
+    max-width: 90%;
+  }
+
+  .home-heading {
+    font-size: 32px;
+  }
+
+  .home-subtext {
+    font-size: 14px;
+  }
+}

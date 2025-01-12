@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" action="">
+  <div class="mb-3">
+    <label for="title" class="form-label">Tên phòng</label>
+    <input type="text" class="form-control" id="title" name="title" required>
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Mô tả</label>
+    <textarea class="form-control" id="description" name="description"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Tạo phòng</button>
+</form>
+{% endblock %}

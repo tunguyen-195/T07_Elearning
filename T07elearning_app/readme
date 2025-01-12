@@ -1,0 +1,17 @@
+# Color Scheme
+Màu	Mã Hex	Vai trò sử dụng
+Primary	#4f77ff	Nút bấm, link, icon chính
+Hover	#486ff2	Hover button, link hover
+Heading	#2d385e	Tiêu đề, heading h1, h2, h3,…
+Body Text	#44525f	Màu chữ chính, đoạn văn bản
+Panel Left	#0c0e21 (0.9)	Nền panel trái (authfy-panel-left)
+Panel Right	#ffffff	Nền panel phải (authfy-panel-right)
+Background	#f0f2f5	Nền tổng thể trang
+Border	#bcc2ce	Viền input, card, …
+Shadow	#9c9c9c / #1d2030	Đổ bóng cấp trung / đậm
+Text phụ	#666666	Nhãn phụ, gợi ý, label
+Input text	#333333	Văn bản trong input
+
+
+flask db migrate -m "Remove old meeting models"
+flask db upgrade

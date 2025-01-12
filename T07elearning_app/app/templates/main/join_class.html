@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4">
+    <h2>Join a Class</h2>
+    <form method="POST" action="{{ url_for('main.join_class') }}">
+        {{ form.csrf_token }}
+        <div class="mb-3">
+            {{ form.meeting_id.label }}
+            {{ form.meeting_id(class="form-control") }}
+        </div>
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+</div>
+{% endblock %}

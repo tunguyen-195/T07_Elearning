@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ meeting.title }}</h1>
+<p>{{ meeting.description }}</p>
+
+<div id="video-container">
+  <video id="localVideo" autoplay muted></video>
+  <video id="remoteVideo" autoplay></video>
+</div>
+
+<div id="chat-container">
+  <input type="text" id="chatInput" placeholder="Type a message...">
+  <button id="sendBtn">Send</button>
+  <div id="chatMessages"></div>
+</div>
+
+<script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+<script>
+const socket = io();
+
+const meetingSlug = "{{ meeting.meeting_slug }}";
+socket.emit('join_meeting', {meeting_slug: meetingSlug});
+
+document.getElementById('sendBtn').onclick = function() {
+  const message = document.getElementById('chatInput').value;
+  socket.emit('chat', {meeting_slug: meetingSlug, message: message});
+};
+
+socket.on('chat', (data) => {
+  const chatMessages = document.getElementById('chatMessages');
+  chatMessages.innerHTML += `<p><strong>${data.username}:</strong> ${data.message}</p>`;
+});
+
+navigator.mediaDevices.getUserMedia({video:true,audio:true})
+  .then(stream => {
+    document.getElementById('localVideo').srcObject = stream;
+    // Setup WebRTC connection here
+  }).catch(e => {console.error(e);});
+</script>
+{% endblock %}

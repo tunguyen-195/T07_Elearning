@@ -1,0 +1,187 @@
+/* main.css */
+/* RESET MỘT PHẦN (Bootstrap đã hỗ trợ sẵn) */
+* {
+  box-sizing: border-box;
+}
+
+/* BODY */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f9fafc; /* Nền nhẹ */
+  color: #4a4a4a;
+}
+
+/* NAVBAR T07 */
+.bg-t07 {
+  /* Ví dụ: gradient xanh dương -> xanh đậm */
+  background: linear-gradient(90deg, #005b8f 0%, #003c60 100%);
+  /* Hoặc bạn chọn màu đơn #0c4a6e */
+}
+
+/* HERO SECTION */
+.bg-hero {
+  background: linear-gradient(90deg, #0c4a6e 0%, #1d6c92 100%);
+  /* Màu xanh dương đậm => tùy chỉnh */
+}
+
+/* NÚT HERO */
+.btn-hero {
+  background-color: #ffcb38; /* Màu vàng nhấn */
+  color: #000;
+  border: none;
+  transition: transform 0.2s ease;
+}
+.btn-hero:hover {
+  background-color: #ffb400;
+  transform: scale(1.05);
+}
+
+/* FEATURE SECTION */
+.text-t07 {
+  color: #0c4a6e;
+}
+
+/* Card tùy biến */
+.feature-card-t07 {
+  border: none;
+  border-radius: 8px;
+}
+.feature-card-t07 .card-title {
+  color: #0c4a6e;
+}
+.feature-card-t07 .card-text {
+  color: #555555;
+}
+
+/* FOOTER */
+.footer-t07 {
+  border-top: 1px solid #e2e2e2;
+}
+.footer-t07 a {
+  color: #005b8f;
+  text-decoration: none;
+}
+.footer-t07 a:hover {
+  text-decoration: underline;
+}
+/*=== ĐOẠN CSS CHO SVG CỦA CARD 4 ===*/
+
+.anim-box {
+  width: 400px; /* tuỳ chỉnh width */
+  height: 300px; /* tuỳ chỉnh height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fanup #box-one {
+  animation: fanup-up 5s ease-out alternate infinite;
+}
+.fanup #box-two {
+  animation: fanup-dia-r 5s ease-out alternate infinite;
+}
+.fanup #box-three {
+  animation: fanup-right 5s ease-out alternate infinite;
+}
+.fanup #box-four {
+  animation: fanup-dia-l 5s ease-out alternate infinite;
+}
+.fanup #box-five {
+  animation: fanup-left 5s ease-out alternate infinite;
+}
+
+/* Ví dụ keyframes fanup-up */
+@keyframes fanup-up {
+  0% {
+    transform: translateY(300px);
+  }
+  25% {
+    transform: translateY(300px);
+  }
+  55% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Tương tự với fanup-dia-r, fanup-right, fanup-dia-l, fanup-left… */
+/* fanup-dia-r */
+@keyframes fanup-dia-r {
+  0% {
+    transform: translateX(-300px) translateY(150px);
+  }
+  25% {
+    transform: translateX(-300px) translateY(150px);
+  }
+  55% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* fanup-right */
+@keyframes fanup-right {
+  0% {
+    transform: translateX(-300px);
+  }
+  25% {
+    transform: translateX(-300px);
+  }
+  55% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* fanup-dia-l */
+@keyframes fanup-dia-l {
+  0% {
+    transform: translateX(300px) translateY(150px);
+  }
+  25% {
+    transform: translateX(300px) translateY(150px);
+  }
+  55% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* fanup-left */
+@keyframes fanup-left {
+  0% {
+    transform: translateX(300px);
+  }
+  25% {
+    transform: translateX(300px);
+  }
+  55% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.anim-box {
+  width: 400px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Nếu muốn tách hẳn text phía dưới */
+}
+
+.anim-box svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
