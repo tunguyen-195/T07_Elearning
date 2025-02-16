@@ -1,5 +1,7 @@
 import logging
 from gevent import monkey
+from logging.handlers import RotatingFileHandler
+from flask import Flask, request
 monkey.patch_all()
 
 from flask_migrate import Migrate
@@ -14,11 +16,25 @@ app = create_app()
 migrate = Migrate(app, db)
 
 # Configure logging
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]',
-                    handlers=[logging.StreamHandler()])
+if not app.debug:
+    # Create a file handler object
+    file_handler = RotatingFileHandler('logs/server.log', maxBytes=10240, backupCount=10)
+    file_handler.setLevel(logging.INFO)
+    
+    # Create a formatter and set it for the handler
+    formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
+    file_handler.setFormatter(formatter)
+    
+    # Add the handler to the app's logger
+    app.logger.addHandler(file_handler)
 
-app.logger.setLevel(logging.DEBUG)
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Server startup')
+
+# Log each request
+@app.before_request
+def log_request_info():
+    app.logger.info(f"Request: {request.method} {request.url}")
 
 @app.shell_context_processor
 def make_shell_context():

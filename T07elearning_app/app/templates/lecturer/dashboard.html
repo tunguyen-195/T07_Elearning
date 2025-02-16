@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Bảng điều khiển Giảng viên</h1>
+<p>Chào mừng đến với bảng điều khiển giảng viên. Tại đây, bạn có thể quản lý các lớp học và bài tập của mình.</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tên Lớp</th>
+            <th>Sinh Viên</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in class_student_data %}
+        <tr>
+            <td>{{ data.class.name }}</td>
+            <td>
+                <ul>
+                    {% for student in data.students %}
+                    <li>{{ student.username }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %} 

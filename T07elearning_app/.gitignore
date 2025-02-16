@@ -118,3 +118,6 @@
    # Cython debug symbols
    cython_debug/
 .codegpt
+
+# Ignore uploaded files
+app/static/uploads/

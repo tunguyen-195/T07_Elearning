@@ -68,6 +68,25 @@ class User(UserMixin, db.Model):
         return f"<User {self.username}>"
 
 
+# -------------- Model Class -------------- #
+class Class(db.Model):
+    __tablename__ = 'classes'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), nullable=False)
+    description = db.Column(db.Text)
+    created_on = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Quan hệ với Enrollment
+    enrollments = db.relationship('Enrollment', backref='class', lazy='dynamic')
+
+    # Quan hệ với Assignment
+    assignments = db.relationship('Assignment', backref='class', lazy='dynamic')
+
+    def __repr__(self):
+        return f"<Class {self.name}>"
+
+
 # -------------- Model Course -------------- #
 class Course(db.Model):
     __tablename__ = 'courses'
@@ -99,11 +118,12 @@ class Enrollment(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=True)
+    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'), nullable=True)
     enrolled_on = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return f"<Enrollment Student={self.student_id}, Course={self.course_id}>"
+        return f"<Enrollment Student={self.student_id}, Class={self.class_id}>"
 
 
 # -------------- Model LectureSession -------------- #
@@ -127,11 +147,13 @@ class Assignment(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'), nullable=True)
     title = db.Column(db.String(128), nullable=False)
     description = db.Column(db.Text)
     due_date = db.Column(db.DateTime)
     max_attempts = db.Column(db.Integer, default=1)
     created_on = db.Column(db.DateTime, default=datetime.utcnow)
+    attachment_url = db.Column(db.String(256))  # New field for file attachment
 
     # Quan hệ với Submission
     submissions = db.relationship('Submission', backref='assignment', lazy='dynamic')
@@ -148,7 +170,7 @@ class Submission(db.Model):
     assignment_id = db.Column(db.Integer, db.ForeignKey('assignments.id'), nullable=False)
     student_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     submission_date = db.Column(db.DateTime, default=datetime.utcnow)
-    file_url = db.Column(db.String(256))  # Đường dẫn đến file bài làm
+    file_url = db.Column(db.String(256))  # Existing field for submission file
     grade = db.Column(db.Float)
     feedback = db.Column(db.Text)
     status = db.Column(db.String(20), default='submitted')  # 'submitted', 'graded'

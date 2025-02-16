@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Tạo Bài Tập</h1>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.title.label }}<br>
+        {{ form.title(size=32) }}
+    </p>
+    <p>
+        {{ form.description.label }}<br>
+        {{ form.description(rows=5) }}
+    </p>
+    <p>
+        {{ form.due_date.label }}<br>
+        {{ form.due_date() }}
+    </p>
+    <p>
+        {{ form.class_id.label }}<br>
+        {{ form.class_id() }}
+    </p>
+    <p>
+        {{ form.attachment.label }}<br>
+        {{ form.attachment() }}
+    </p>
+    <p><button type="submit">Tạo Bài Tập</button></p>
+</form>
+{% endblock %} 

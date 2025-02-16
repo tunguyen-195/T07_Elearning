@@ -2,6 +2,8 @@ from flask import render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_required
 from app.main import bp
 from app.main.forms import JoinClassForm
+from app.models import Class, Enrollment
+from app.extensions import db
 
 @bp.route('/')
 @bp.route('/index')
@@ -32,24 +34,20 @@ def create_class():
     return render_template('classroom/create_class.html')
 
 @bp.route('/join_class', methods=['GET', 'POST'])
+@login_required
 def join_class():
-    """
-    Xử lý logic để người dùng nhập MeetingSlug -> redirect sang /room/<meeting_slug>
-    """
-    form = JoinClassForm()
-    if form.validate_on_submit():
-        meeting_id_input = form.meeting_id.data.strip()
-        # Tìm meeting dựa trên meeting_slug
-        room = Meeting.query.filter_by(meeting_slug=meeting_id_input).first()
-
-        if not room:
-            flash(f"Không tìm thấy phòng với ID/Slug: {meeting_id_input}", "danger")
-            return redirect(url_for('main.join_class'))
-        
-        # Khi tìm thấy, chuyển hướng sang route 'main.room'
-        return redirect(url_for('main.room', meeting_slug=room.meeting_slug))
-    
-    return render_template('main/join_class.html', form=form)
+    if request.method == 'POST':
+        class_code = request.form.get('class_code')
+        class_ = Class.query.filter_by(name=class_code).first()
+        if class_:
+            enrollment = Enrollment(student_id=current_user.id, class_id=class_.id)
+            db.session.add(enrollment)
+            db.session.commit()
+            flash('You have successfully joined the class!')
+            return redirect(url_for('main.index'))
+        else:
+            flash('Class not found. Please check the class code.')
+    return render_template('main/join_class.html')
 
 @bp.route('/room/<meeting_slug>')
 @login_required

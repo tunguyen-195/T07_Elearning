@@ -1,0 +1,104 @@
+2025-02-16 22:17:25,590 INFO: Server startup [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:32]
+2025-02-16 22:17:25,591 INFO: === Starting Socket.IO server === [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:49]
+2025-02-16 22:18:17,165 INFO: Server startup [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:32]
+2025-02-16 22:18:17,165 INFO: === Starting Socket.IO server === [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:49]
+2025-02-16 22:18:22,406 INFO: Request: GET http://127.0.0.1:5000/index [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:18:22,452 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:18:22,479 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:18:26,085 INFO: Request: GET http://127.0.0.1:5000/lecturer/assignment/create [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:18:26,113 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:18:26,115 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:19:22,128 INFO: Server startup [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:32]
+2025-02-16 22:19:22,128 INFO: === Starting Socket.IO server === [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:49]
+2025-02-16 22:19:25,368 INFO: Request: GET http://127.0.0.1:5000/index [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:19:25,416 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:19:25,443 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:19:27,895 INFO: Request: GET http://127.0.0.1:5000/lecturer/class/create [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:19:27,898 ERROR: Exception on /lecturer/class/create [GET] [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py:1414]
+Traceback (most recent call last):
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\app\lecturer\routes.py", line 98, in create_class
+    return render_template('lecturer/create_class.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\app\templates\lecturer\create_class.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\app\templates\base.html", line 75, in top-level template code
+    {% block content %}
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\app\templates\lecturer\create_class.html", line 6, in block 'content'
+    {{ form.hidden_tag() }}
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2025-02-16 22:21:35,888 INFO: Server startup [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:32]
+2025-02-16 22:21:35,889 INFO: === Starting Socket.IO server === [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:49]
+2025-02-16 22:21:39,773 INFO: Request: GET http://127.0.0.1:5000/index [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:21:39,818 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:21:39,845 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:21:41,140 INFO: Request: GET http://127.0.0.1:5000/lecturer/class/create [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+2025-02-16 22:21:41,143 ERROR: Exception on /lecturer/class/create [GET] [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py:1414]
+Traceback (most recent call last):
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\app\lecturer\routes.py", line 98, in create_class
+    return render_template('lecturer/create_class.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\app\templates\lecturer\create_class.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\app\templates\base.html", line 75, in top-level template code
+    {% block content %}
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\app\templates\lecturer\create_class.html", line 6, in block 'content'
+    {{ form.hidden_tag() }}
+  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2025-02-16 22:22:51,661 INFO: Server startup [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:32]
+2025-02-16 22:22:51,661 INFO: === Starting Socket.IO server === [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:49]

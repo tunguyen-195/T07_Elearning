@@ -33,3 +33,34 @@ def assign_role():
             flash('User already has this role.')
         return redirect(url_for('admin.dashboard'))
     return render_template('admin/assign_role.html', form=form)
+
+@bp.route('/user/add', methods=['GET', 'POST'])
+@login_required
+def add_user():
+    if not current_user.is_admin():
+        flash('You do not have permission to access this page.')
+        return redirect(url_for('main.index'))
+    # Implement form and logic to add a user
+    return render_template('admin/add_user.html')
+
+@bp.route('/user/edit/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def edit_user(user_id):
+    if not current_user.is_admin():
+        flash('You do not have permission to access this page.')
+        return redirect(url_for('main.index'))
+    user = User.query.get_or_404(user_id)
+    # Implement form and logic to edit a user
+    return render_template('admin/edit_user.html', user=user)
+
+@bp.route('/user/delete/<int:user_id>', methods=['POST'])
+@login_required
+def delete_user(user_id):
+    if not current_user.is_admin():
+        flash('You do not have permission to access this page.')
+        return redirect(url_for('main.index'))
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    flash('User has been deleted.')
+    return redirect(url_for('admin.dashboard'))

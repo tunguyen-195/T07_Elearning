@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Tạo Lớp Học</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <p>
+        <label for="name">Tên Lớp:</label><br>
+        <input type="text" name="name" id="name" required>
+    </p>
+    <p>
+        <label for="description">Mô Tả:</label><br>
+        <textarea name="description" id="description" rows="5"></textarea>
+    </p>
+    <p><button type="submit">Tạo Lớp</button></p>
+</form>
+{% endblock %}

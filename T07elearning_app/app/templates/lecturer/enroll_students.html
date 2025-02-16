@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Thêm Sinh Viên Vào Lớp: {{ class_.name }}</h1>
+
+<!-- Search Form -->
+<form method="GET" action="{{ url_for('lecturer.enroll_students', class_id=class_.id) }}">
+    <input type="text" name="search" placeholder="Tìm kiếm sinh viên" value="{{ request.args.get('search', '') }}">
+    <button type="submit">Tìm kiếm</button>
+</form>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <p>Chọn sinh viên để thêm vào lớp:</p>
+    {% for student in students %}
+        <div>
+            <input type="checkbox" name="students" value="{{ student.id }}" id="student-{{ student.id }}">
+            <label for="student-{{ student.id }}">{{ student.username }}</label>
+        </div>
+    {% endfor %}
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}
