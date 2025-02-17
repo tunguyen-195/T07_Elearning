@@ -8,7 +8,7 @@ from flask_migrate import Migrate
 from app import create_app
 from app.extensions import db, socketio
 from app.models import (
-    User, Role, Course, Enrollment, LectureSession,
+    User, Role, Enrollment, LectureSession,
     Assignment, Submission, Notification
 )
 
@@ -39,7 +39,7 @@ def log_request_info():
 @app.shell_context_processor
 def make_shell_context():
     return {
-        'db': db, 'User': User, 'Role': Role, 'Course': Course,
+        'db': db, 'User': User, 'Role': Role,
         'Enrollment': Enrollment, 'LectureSession': LectureSession,
         'Assignment': Assignment, 'Submission': Submission,
         'Notification': Notification

@@ -1,8 +1,9 @@
 # app/student/forms.py
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, FileField
+from wtforms import FileField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired
 
 class SubmitAssignmentForm(FlaskForm):
-    file = FileField('Upload Assignment', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    file = FileField('Tệp đính kèm')
+    answer = TextAreaField('Câu trả lời', validators=[DataRequired()])
+    submit = SubmitField('Nộp Bài Tập')

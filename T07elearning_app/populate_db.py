@@ -2,8 +2,8 @@ import sys
 from datetime import datetime, timedelta
 from app import create_app, db
 from app.models import (
-    Role, User, Course, Enrollment, LectureSession,
-    Assignment, Submission, Notification
+    Role, User, Enrollment, LectureSession,
+    Assignment, Submission, Notification, Class
 )
 
 def populate():
@@ -56,35 +56,32 @@ def populate():
     db.session.commit()
     print("Users created.")
 
-    # Tạo khoá học
-    course = Course.query.filter_by(name='Introduction to Flask').first()
-    if not course:
-        course = Course(
-            name='Introduction to Flask',
-            description='Learn the basics of Flask web development.',
-            lecturer_id=lecturer.id,
-            start_date=datetime.utcnow().date(),
-            end_date=(datetime.utcnow() + timedelta(days=60)).date(),
+    # Tạo lớp học
+    class1 = Class.query.filter_by(name='Class 1').first()
+    if not class1:
+        class1 = Class(
+            name='Class 1',
+            description='Description for Class 1',
             created_on=datetime.utcnow()
         )
-        db.session.add(course)
-        db.session.commit()
-    print("Course created.")
+        db.session.add(class1)
+    db.session.commit()
+    print("Classes created.")
 
     # Tạo ghi danh cho học viên
-    enrollment1 = Enrollment.query.filter_by(student_id=student1.id, course_id=course.id).first()
+    enrollment1 = Enrollment.query.filter_by(student_id=student1.id, class_id=class1.id).first()
     if not enrollment1:
         enrollment1 = Enrollment(
             student_id=student1.id,
-            course_id=course.id,
+            class_id=class1.id,
             enrolled_on=datetime.utcnow()
         )
         db.session.add(enrollment1)
-    enrollment2 = Enrollment.query.filter_by(student_id=student2.id, course_id=course.id).first()
+    enrollment2 = Enrollment.query.filter_by(student_id=student2.id, class_id=class1.id).first()
     if not enrollment2:
         enrollment2 = Enrollment(
             student_id=student2.id,
-            course_id=course.id,
+            class_id=class1.id,
             enrolled_on=datetime.utcnow()
         )
         db.session.add(enrollment2)
@@ -92,36 +89,26 @@ def populate():
     print("Enrollments created.")
 
     # Tạo buổi giảng (LectureSession)
-    lecture1 = LectureSession.query.filter_by(title='Flask Basics', course_id=course.id).first()
+    lecture1 = LectureSession.query.filter_by(title='Lecture 1', class_id=class1.id).first()
     if not lecture1:
         lecture1 = LectureSession(
-            course_id=course.id,
-            title='Flask Basics',
-            description='Introduction to Flask framework.',
+            class_id=class1.id,
+            title='Lecture 1',
+            description='Introduction to the course.',
             date=datetime.utcnow() + timedelta(days=1),
-            video_url='http://example.com/videos/flask_basics'
+            video_url='http://example.com/videos/lecture1'
         )
         db.session.add(lecture1)
-    lecture2 = LectureSession.query.filter_by(title='Flask Extensions', course_id=course.id).first()
-    if not lecture2:
-        lecture2 = LectureSession(
-            course_id=course.id,
-            title='Flask Extensions',
-            description='Using extensions with Flask.',
-            date=datetime.utcnow() + timedelta(days=3),
-            video_url='http://example.com/videos/flask_extensions'
-        )
-        db.session.add(lecture2)
     db.session.commit()
     print("Lecture sessions created.")
 
     # Tạo bài tập (Assignment)
-    assignment = Assignment.query.filter_by(title='Flask Project', course_id=course.id).first()
+    assignment = Assignment.query.filter_by(title='Assignment 1', class_id=class1.id).first()
     if not assignment:
         assignment = Assignment(
-            course_id=course.id,
-            title='Flask Project',
-            description='Build a web application using Flask.',
+            class_id=class1.id,
+            title='Assignment 1',
+            description='Complete the assignment.',
             due_date=datetime.utcnow() + timedelta(days=30),
             max_attempts=3,
             created_on=datetime.utcnow()
@@ -137,7 +124,7 @@ def populate():
             assignment_id=assignment.id,
             student_id=student1.id,
             submission_date=datetime.utcnow(),
-            file_url='http://example.com/uploads/student1_flask_project.zip',
+            file_url='http://example.com/uploads/student1_assignment.zip',
             grade=85.0,
             feedback='Good job!',
             status='graded'
@@ -149,7 +136,7 @@ def populate():
             assignment_id=assignment.id,
             student_id=student2.id,
             submission_date=datetime.utcnow(),
-            file_url='http://example.com/uploads/student2_flask_project.zip',
+            file_url='http://example.com/uploads/student2_assignment.zip',
             grade=90.0,
             feedback='Excellent work!',
             status='graded'
@@ -161,32 +148,30 @@ def populate():
     # Tạo thông báo (Notification)
     notification1 = Notification.query.filter_by(
         user_id=student1.id,
-        message='Assignment Flask Project has been graded.'
+        message='Assignment 1 has been graded.'
     ).first()
     if not notification1:
         notification1 = Notification(
             user_id=student1.id,
-            message='Assignment Flask Project has been graded.',
+            message='Assignment 1 has been graded.',
             created_on=datetime.utcnow(),
             is_read=False
         )
         db.session.add(notification1)
     notification2 = Notification.query.filter_by(
         user_id=student2.id,
-        message='Assignment Flask Project has been graded.'
+        message='Assignment 1 has been graded.'
     ).first()
     if not notification2:
         notification2 = Notification(
             user_id=student2.id,
-            message='Assignment Flask Project has been graded.',
+            message='Assignment 1 has been graded.',
             created_on=datetime.utcnow(),
             is_read=False
         )
         db.session.add(notification2)
     db.session.commit()
     print("Notifications created.")
-
-    print("Dữ liệu mẫu đã được chèn thành công vào cơ sở dữ liệu.")
 
 if __name__ == '__main__':
     populate()

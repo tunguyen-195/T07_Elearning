@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h2>{{ assignment.title }}</h2>
+            <p class="mb-0"><strong>Hạn nộp:</strong> {{ assignment.due_date.strftime('%Y-%m-%d') }}</p>
+            <p class="mb-0"><strong>Trạng thái:</strong> {{ submission.status if submission else 'Chưa nộp' }}</p>
+        </div>
+        <div class="card-body">
+            <div class="mb-4">
+                <h4>Tệp đính kèm</h4>
+                {% if assignment.attachment_url %}
+                    <p><strong>Tệp:</strong> <a href="{{ url_for('static', filename=assignment.attachment_url.replace('\\', '/')) }}" download class="btn btn-outline-primary btn-sm">Tải xuống</a></p>
+                    <p><strong>Tên tệp:</strong> {{ assignment.attachment_url.split('/')[-1] }}</p>
+                {% else %}
+                    <p><strong>Không có tệp đính kèm nào.</strong></p>
+                {% endif %}
+            </div>
+
+            <div class="mb-4">
+                {% if not submission or submission.status == 'pending' %}
+                    <h4>Nộp bài tập</h4>
+                    <form method="POST" enctype="multipart/form-data" action="{{ url_for('student.submit_assignment', assignment_id=assignment.id) }}">
+                        <div class="form-group">
+                            <label for="file">Tải lên file đáp án:</label>
+                            <input type="file" name="file" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="answer">Câu trả lời:</label>
+                            <textarea name="answer" class="form-control" rows="5" placeholder="Nhập câu trả lời của bạn ở đây..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Nộp Bài</button>
+                    </form>
+                {% else %}
+                    <p class="alert alert-info">Bạn đã nộp bài tập này.</p>
+                {% endif %}
+            </div>
+
+            <div class="submission-status">
+                {% if submission %}
+                    <h4>Trạng thái nộp bài</h4>
+                    <p><strong>Điểm:</strong> {{ submission.grade if submission.grade is not none else 'Chưa chấm' }}</p>
+                    <p><strong>Phản hồi:</strong> {{ submission.feedback if submission.feedback else 'Chưa có phản hồi' }}</p>
+                    <p><strong>Tệp nộp:</strong> 
+                        {% if submission.file_url %}
+                            <a href="{{ url_for('static', filename=submission.file_url.replace('\\', '/')) }}" download class="btn btn-outline-primary btn-sm">Tải xuống</a>
+                        {% else %}
+                            Không có tệp
+                        {% endif %}
+                    </p>
+                {% else %}
+                    <p class="alert alert-warning">Bạn chưa nộp bài tập này.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

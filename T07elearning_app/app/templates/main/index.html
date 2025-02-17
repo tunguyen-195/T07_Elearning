@@ -2,7 +2,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Chào mừng đến với Bảng điều khiển</h1>
+<h1>Welcome to the E-Learning Platform</h1>
+
+{% if current_user.is_authenticated %}
+    {% if current_user.is_lecturer() %}
+        <p>Welcome, Lecturer!</p>
+        <!-- Lecturer-specific content -->
+    {% elif current_user.is_student() %}
+        <p>Welcome, Student!</p>
+        <!-- Student-specific content -->
+    {% elif current_user.is_admin() %}
+        <p>Welcome, Admin!</p>
+        <!-- Admin-specific content -->
+    {% endif %}
+{% else %}
+    <p>Please log in to access your dashboard.</p>
+{% endif %}
 
 <!-- HERO SECTION -->
 <div class="p-5 mb-4 bg-hero text-white rounded-3 shadow-sm">
@@ -48,10 +63,11 @@
               Giao bài, nộp bài trực tuyến, chấm điểm nhanh chóng. 
               Học viên không bỏ lỡ deadline, giảng viên giảm gánh nặng.
             </p>
-            {% if current_user.is_lecturer() %}
+            {% if current_user.is_authenticated and current_user.is_lecturer() %}
             <a href="{{ url_for('lecturer.create_assignment') }}" class="btn btn-primary">Tạo Bài Tập</a>
-            {% elif current_user.is_student() %}
-            <a href="{{ url_for('student.manage_assignments') }}" class="btn btn-primary">Quản lý Bài Tập</a>
+            <a href="{{ url_for('lecturer.manage_assignments') }}" class="btn btn-secondary">Quản lý Bài Tập</a>
+            {% elif current_user.is_authenticated and current_user.is_student() %}
+            <a href="{{ url_for('student.view_assignments') }}" class="btn btn-primary">Quản lý Bài Tập</a>
             {% endif %}
           </div>
         </div>

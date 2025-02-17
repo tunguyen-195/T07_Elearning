@@ -1,29 +1,60 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Tạo Bài Tập</h1>
-<form method="POST" enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.title.label }}<br>
-        {{ form.title(size=32) }}
-    </p>
-    <p>
-        {{ form.description.label }}<br>
-        {{ form.description(rows=5) }}
-    </p>
-    <p>
-        {{ form.due_date.label }}<br>
-        {{ form.due_date() }}
-    </p>
-    <p>
-        {{ form.class_id.label }}<br>
-        {{ form.class_id() }}
-    </p>
-    <p>
-        {{ form.attachment.label }}<br>
-        {{ form.attachment() }}
-    </p>
-    <p><button type="submit">Tạo Bài Tập</button></p>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Assignment</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tạo Bài Tập</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.title.label }} {{ form.title(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.description.label }} {{ form.description(class="form-control", rows=5) }}
+            </div>
+            <div class="form-group">
+                {{ form.due_date.label }} {{ form.due_date(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.class_id.label }} {{ form.class_id(class="form-control") }}
+            </div>
+            <div class="form-group">
+                <label for="attachment">Tệp đính kèm:</label>
+                <input type="file" name="attachment" class="form-control">
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Include Bootstrap Datepicker JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#due_date').datepicker({
+                format: 'yyyy-mm-dd', // Format for the date
+                autoclose: true, // Close the datepicker after selection
+                todayHighlight: true // Highlight today's date
+            });
+        });
+    </script>
+</body>
+</html>
 {% endblock %} 

@@ -2,7 +2,7 @@
 from flask import Flask
 from config import Config
 from app.extensions import db, migrate, mail, socketio, compress
-from app.models import User, Role, Course, Enrollment, LectureSession, Assignment, Submission, Notification
+from app.models import User, Role, Enrollment, LectureSession, Assignment, Submission, Notification
 from flask_login import LoginManager
 from flask_admin import Admin
 from app.admin.admin_views import AdminModelView
@@ -55,19 +55,13 @@ def create_app(config_class=Config):
     admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
     admin.add_view(AdminModelView(User, db.session))
     admin.add_view(AdminModelView(Role, db.session))
-    admin.add_view(AdminModelView(Course, db.session))
     admin.add_view(AdminModelView(Enrollment, db.session))
     admin.add_view(AdminModelView(LectureSession, db.session))
     admin.add_view(AdminModelView(Assignment, db.session))
     admin.add_view(AdminModelView(Submission, db.session))
     admin.add_view(AdminModelView(Notification, db.session))
 
-    @app.cli.command("seed")
-    def seed():
-        """Insert sample data into the database."""
-        from populate_db import populate
-        populate()
-
+    # Define user_loader function
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))

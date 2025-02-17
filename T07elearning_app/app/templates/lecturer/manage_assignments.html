@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Quản lý Bài Tập</h1>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class="flashes">
+        {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tiêu đề</th>
+            <th>Lớp</th>
+            <th>Hạn nộp</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for assignment in assignments %}
+        <tr>
+            <td>{{ assignment.title }}</td>
+            <td>{{ assignment.class.name }}</td>
+            <td>{{ assignment.due_date.strftime('%Y-%m-%d') }}</td>
+            <td>
+                <a href="{{ url_for('lecturer.view_submissions', assignment_id=assignment.id) }}" class="btn btn-info btn-sm">Xem Nộp Bài</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %} 

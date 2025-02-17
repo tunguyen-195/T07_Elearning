@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Danh Sách Bài Tập</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tiêu đề</th>
+                <th>Mô tả</th>
+                <th>Hạn nộp</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for submission in submissions %}
+            <tr>
+                <td>{{ submission.assignment.title }}</td>
+                <td>{{ submission.assignment.description }}</td>
+                <td>{{ submission.assignment.due_date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ submission.status }}</td>
+                <td>
+                    <a href="{{ url_for('student.view_assignment', assignment_id=submission.assignment.id) }}" class="btn btn-info">Xem Chi Tiết</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %} 

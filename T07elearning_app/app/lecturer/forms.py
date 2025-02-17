@@ -2,22 +2,15 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, DateField, IntegerField, DateTimeField, SelectField, FileField
 from wtforms.validators import DataRequired
-from app.models import Class
-
-class CreateCourseForm(FlaskForm):
-    name = StringField('Course Name', validators=[DataRequired()])
-    description = TextAreaField('Description')
-    start_date = DateField('Start Date', format='%Y-%m-%d', validators=[DataRequired()])
-    end_date = DateField('End Date', format='%Y-%m-%d', validators=[DataRequired()])
-    submit = SubmitField('Create Course')
+from app.models import Class, Enrollment, Assignment, Submission, User
 
 class CreateAssignmentForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    description = TextAreaField('Description')
-    due_date = DateTimeField('Due Date', format='%Y-%m-%d %H:%M:%S')
-    class_id = SelectField('Class', coerce=int)
-    attachment = FileField('Attachment')
-    submit = SubmitField('Create Assignment')
+    title = StringField('Tiêu đề', validators=[DataRequired()])
+    description = TextAreaField('Mô tả')
+    due_date = DateTimeField('Hạn nộp', format='%Y-%m-%d', validators=[DataRequired()])
+    class_id = SelectField('Lớp', coerce=int, validators=[DataRequired()])
+    attachment = FileField('Tệp đính kèm')
+    submit = SubmitField('Tạo Bài Tập')
 
     def __init__(self, *args, **kwargs):
         super(CreateAssignmentForm, self).__init__(*args, **kwargs)
@@ -41,3 +34,4 @@ class CreateClassForm(FlaskForm):
 
 class EnrollStudentsForm(FlaskForm):
     submit = SubmitField('Thêm Sinh Viên')
+

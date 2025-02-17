@@ -15,27 +15,19 @@ def login():
     if form.validate_on_submit():
         app.logger.debug("Form đã được xác thực.")
         user = User.query.filter_by(username=form.username.data).first()
-        if user:
-            app.logger.debug(f"Người dùng tìm thấy: {user.username}")
-        else:
-            app.logger.debug("Không tìm thấy người dùng.")
-
-        if user and user.check_password(form.password.data):
-            login_user(user, remember=form.remember_me.data)
-            app.logger.debug("Người dùng đã đăng nhập thành công.")
-            flash('Đăng nhập thành công!', 'success')
-            return redirect(url_for('main.index'))
-        else:
-            flash('Tên đăng nhập hoặc mật khẩu không đúng.', 'danger')
-            app.logger.debug("Mật khẩu không đúng hoặc người dùng không tồn tại.")
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('auth.login'))
+        login_user(user, remember=form.remember_me.data)
+        app.logger.debug("Người dùng đã đăng nhập thành công.")
+        flash('Đăng nhập thành công!', 'success')
+        return redirect(url_for('main.index'))
     else:
         if request.method == 'POST':
             flash('Form validation failed.', 'danger')
             app.logger.debug("Xác thực form thất bại.")
             app.logger.debug(f"Form Errors: {form.errors}")  # Thêm dòng này để log lỗi
     return render_template('auth/login.html', form=form)
-
-
 
 @bp.route('/signup', methods=['GET', 'POST'])
 def register():
@@ -73,7 +65,7 @@ def reset_password():
 @login_required
 def logout():
     logout_user()
-    flash('Bạn đã đăng xuất.', 'info')
+    flash('You have been logged out.')
     return redirect(url_for('main.index'))
 
 @bp.route('/signup', methods=['GET', 'POST'])
