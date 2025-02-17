@@ -3,9 +3,9 @@ from flask import Flask
 from config import Config
 from app.extensions import db, migrate, mail, socketio, compress
 from app.models import User, Role, Enrollment, LectureSession, Assignment, Submission, Notification
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from flask_admin import Admin
-from app.admin.admin_views import AdminModelView
+from flask_admin.contrib.sqla import ModelView
 from loguru import logger
 import sys
 
@@ -53,6 +53,14 @@ def create_app(config_class=Config):
 
     # Initialize Flask-Admin
     admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
+
+    # Create a custom ModelView class to handle permissions
+    class AdminModelView(ModelView):
+        def is_accessible(self):
+            # Only allow access to admin users
+            return current_user.is_authenticated and current_user.is_admin
+
+    # Add views for your models
     admin.add_view(AdminModelView(User, db.session))
     admin.add_view(AdminModelView(Role, db.session))
     admin.add_view(AdminModelView(Enrollment, db.session))
