@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Video cho Khóa Học: {{ course.name }}</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tên Video</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for video in videos %}
+        <tr>
+            <td>{{ video.title }}</td>
+            <td>
+                <a href="{{ url_for('static', filename=video.video_url) }}" class="btn btn-primary btn-sm" download>Tải xuống</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %} 

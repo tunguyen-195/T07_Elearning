@@ -2,12 +2,12 @@
 from flask import render_template, redirect, url_for, flash, request, send_from_directory
 from flask_login import login_required, current_user
 from app.student import bp
-from app.models import Enrollment, Submission, Assignment, Class
+from app.models import Enrollment, Submission, Assignment, Class, Course, LectureVideo
 from app.student.forms import SubmitAssignmentForm
 from app.extensions import db
 from werkzeug.utils import secure_filename
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 @bp.route('/dashboard')
 @login_required
@@ -20,6 +20,14 @@ def dashboard():
 def submit_assignment(assignment_id):
     assignment = Assignment.query.get_or_404(assignment_id)
     submission = Submission.query.filter_by(assignment_id=assignment.id, student_id=current_user.id).first()
+
+    # Calculate the deadline time
+    deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
+
+    # Check if the submission is late
+    if datetime.utcnow() > deadline_time:
+        flash('The deadline for this assignment has passed.', 'danger')
+        return redirect(url_for('student.view_assignment', assignment_id=assignment.id))
 
     # Check if the submission exists and is not pending
     if submission and submission.status != 'pending':
@@ -115,9 +123,52 @@ def manage_assignments():
 def view_assignment(assignment_id):
     assignment = Assignment.query.get_or_404(assignment_id)
     submission = Submission.query.filter_by(assignment_id=assignment.id, student_id=current_user.id).first()
-    
-    return render_template('student/view_assignment.html', assignment=assignment, submission=submission)
+
+    # Calculate the deadline time
+    deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
+    remaining_time = (deadline_time - datetime.utcnow()).total_seconds()
+
+    # Check if the submission is overdue
+    if remaining_time <= 0 and (not submission or submission.status == 'pending'):
+        if submission:
+            submission.status = 'overdue'
+        else:
+            submission = Submission(
+                assignment_id=assignment.id,
+                student_id=current_user.id,
+                submission_date=None,
+                file_url=None,
+                status='overdue',
+                feedback='',
+                grade=None,
+                answer=''
+            )
+            db.session.add(submission)
+        db.session.commit()
+
+    return render_template('student/view_assignment.html', assignment=assignment, submission=submission, remaining_time=remaining_time)
 
 @bp.route('/download/<path:filename>', methods=['GET'])
 def download_file(filename):
     return send_from_directory('static/uploads', filename, as_attachment=True)
+
+@bp.route('/courses', methods=['GET'])
+@login_required
+def view_courses():
+    if not current_user.is_student():
+        flash('Bạn không có quyền truy cập trang này.')
+        return redirect(url_for('main.index'))
+
+    courses = Course.query.all()
+    return render_template('student/view_courses.html', courses=courses)
+
+@bp.route('/course/<int:course_id>/videos', methods=['GET'])
+@login_required
+def view_videos(course_id):
+    if not current_user.is_student():
+        flash('Bạn không có quyền truy cập trang này.')
+        return redirect(url_for('main.index'))
+
+    course = Course.query.get_or_404(course_id)
+    videos = LectureVideo.query.filter_by(course_id=course.id).all()
+    return render_template('student/view_videos.html', course=course, videos=videos)

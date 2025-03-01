@@ -1,68 +1,73 @@
-2025-02-17 15:28:11,020 INFO: Request: GET http://127.0.0.1:5000/admin/static/admin/js/form.js?v=1.0.1 [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:28:11,023 INFO: Request: GET http://127.0.0.1:5000/admin/static/admin/js/filters.js?v=1.0.0 [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:28:11,025 INFO: Request: GET http://127.0.0.1:5000/admin/static/admin/js/actions.js?v=1.0.0 [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:28:11,025 INFO: Request: GET http://127.0.0.1:5000/admin/static/bootstrap/bootstrap3/swatch/fonts/glyphicons-halflings-regular.woff2 [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:21,180 INFO: Server startup [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:32]
-2025-02-17 15:29:21,180 INFO: === Starting Socket.IO server === [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:49]
-2025-02-17 15:29:21,327 INFO: Request: GET http://127.0.0.1:5000/ [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:21,379 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:21,403 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:26,374 INFO: Request: GET http://127.0.0.1:5000/lecturer/class/create [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:26,379 INFO: Request: GET http://127.0.0.1:5000/index [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:26,412 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:26,413 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:30,650 INFO: Request: GET http://127.0.0.1:5000/auth/logout [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:30,654 INFO: Request: GET http://127.0.0.1:5000/index [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:30,680 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:30,681 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:32,549 INFO: Request: GET http://127.0.0.1:5000/auth/login [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:32,582 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:32,584 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:32,585 INFO: Request: GET http://127.0.0.1:5000/static/css/login.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:32,586 INFO: Request: GET http://127.0.0.1:5000/static/js/login.js [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:40,988 INFO: Request: POST http://127.0.0.1:5000/auth/login [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:41,145 INFO: Request: GET http://127.0.0.1:5000/index [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:41,186 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:41,187 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:42,697 INFO: Request: GET http://127.0.0.1:5000/lecturer/class/create [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:42,732 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:29:42,733 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:30:44,608 INFO: Request: GET http://127.0.0.1:5000/join_class [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:30:44,653 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:30:44,655 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 15:31:00,100 INFO: Request: GET http://127.0.0.1:5000/index [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:49:56,839 INFO: Server startup [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:32]
-2025-02-17 19:49:56,840 INFO: === Starting Socket.IO server === [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:49]
-2025-02-17 19:50:00,351 INFO: Request: GET http://127.0.0.1:5000/index [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:50:00,404 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:50:00,437 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:50:03,245 INFO: Request: GET http://127.0.0.1:5000/lecturer/assignment/create [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:50:03,281 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:50:03,282 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:50:09,437 INFO: Request: POST http://127.0.0.1:5000/lecturer/assignment/create [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:50:09,440 ERROR: Exception on /lecturer/assignment/create [POST] [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py:1414]
+2025-03-01 18:18:44,597 ERROR: Exception on /lecturer/courses [GET] [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
-  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 2190, in wsgi_app
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: courses
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 1486, in full_dispatch_request
     rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 1484, in full_dispatch_request
     rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\env\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask_login/utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\app\lecturer\routes.py", line 34, in create_assignment
-    attachment_url=attachment_url
-                   ^^^^^^^^^^^^^^
-UnboundLocalError: cannot access local variable 'attachment_url' where it is not associated with a value
-2025-02-17 19:50:16,552 INFO: Request: POST http://127.0.0.1:5000/lecturer/assignment/create [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:50:16,571 INFO: Request: GET http://127.0.0.1:5000/lecturer/dashboard [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:50:16,606 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:50:16,608 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
-2025-02-17 19:50:24,161 INFO: Request: GET http://127.0.0.1:5000/lecturer/assignment/create [in D:\Workspace\Freelance\Research\T07_Elearning\T07elearning_app\run.py:37]
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/app/lecturer/routes.py", line 214, in manage_courses
+    courses = Course.query.filter_by(lecturer_id=current_user.id).all()
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 2699, in all
+    return self._iter().all()  # type: ignore
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 2853, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1416, in execute
+    return meth(
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: courses
+[SQL: SELECT courses.id AS courses_id, courses.name AS courses_name, courses.description AS courses_description, courses.created_on AS courses_created_on, courses.lecturer_id AS courses_lecturer_id 
+FROM courses 
+WHERE courses.lecturer_id = ?]
+[parameters: (2,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-03-01 18:19:56,359 INFO: Server startup [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:32]
+2025-03-01 18:19:56,360 INFO: === Starting Socket.IO server === [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:49]
+2025-03-01 18:20:03,276 INFO: Request: GET http://127.0.0.1:5000/ [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:03,471 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:03,499 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:05,385 INFO: Request: GET http://127.0.0.1:5000/lecturer/courses [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:05,488 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:05,511 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:12,189 INFO: Request: POST http://127.0.0.1:5000/lecturer/courses [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:12,205 INFO: Request: GET http://127.0.0.1:5000/lecturer/courses [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:12,263 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:12,266 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:14,113 INFO: Request: GET http://127.0.0.1:5000/lecturer/course/1/videos [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:14,211 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:14,231 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:22,665 INFO: Request: GET http://127.0.0.1:5000/index [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:22,790 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-01 18:20:22,805 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]

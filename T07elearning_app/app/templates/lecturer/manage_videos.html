@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Quản lý Video cho Khóa Học: {{ course.name }}</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.title.label }} {{ form.title(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.video.label }} {{ form.video(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+
+<h2>Danh sách Video</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tên Video</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for video in videos %}
+        <tr>
+            <td>{{ video.title }}</td>
+            <td>
+                <a href="{{ url_for('static', filename=video.video_url) }}" class="btn btn-primary btn-sm" download>Tải xuống</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %} 

@@ -2,11 +2,12 @@
 from flask import render_template, redirect, url_for, flash, request, current_app, send_from_directory
 from flask_login import login_required, current_user
 from app.lecturer import bp
-from app.models import Enrollment, Assignment, Class, User, Submission
-from app.lecturer.forms import CreateAssignmentForm, AssignmentForm, CreateClassForm, EnrollStudentsForm
+from app.models import Enrollment, Assignment, Class, User, Submission, Course, LectureVideo
+from app.lecturer.forms import CreateAssignmentForm, AssignmentForm, CreateClassForm, EnrollStudentsForm, CreateCourseForm, UploadVideoForm
 from app.extensions import db
 import os
 from werkzeug.utils import secure_filename
+from datetime import datetime, timedelta
 
 
 @bp.route('/assignment/create', methods=['GET', 'POST'])
@@ -31,7 +32,8 @@ def create_assignment():
             description=form.description.data,
             due_date=form.due_date.data,  # Ensure this is a datetime object
             class_id=form.class_id.data,
-            attachment_url=attachment_url
+            attachment_url=attachment_url,
+            lecturer_id=current_user.id  # Set the lecturer_id to the current user
         )
         db.session.add(assignment)
         db.session.commit()
@@ -119,7 +121,8 @@ def manage_assignments():
         flash('Bạn không có quyền truy cập trang này.')
         return redirect(url_for('main.index'))
 
-    assignments = Assignment.query.all()
+    # Filter assignments by the current lecturer
+    assignments = Assignment.query.filter_by(lecturer_id=current_user.id).all()
     return render_template('lecturer/manage_assignments.html', assignments=assignments)
 
 @bp.route('/assignment/<int:assignment_id>/submissions', methods=['GET'])
@@ -171,3 +174,70 @@ def download_file(filename):
     # Ensure the path is correct and secure
     upload_folder = os.path.join('app', 'static', 'uploads')
     return send_from_directory(upload_folder, filename, as_attachment=True)
+
+@bp.route('/view_assignment/<int:assignment_id>', methods=['GET'])
+@login_required
+def view_assignment(assignment_id):
+    assignment = Assignment.query.get_or_404(assignment_id)
+    submissions = Submission.query.filter_by(assignment_id=assignment.id).all()
+
+    # Calculate the deadline time
+    deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
+
+    # Update overdue status for each submission
+    for submission in submissions:
+        if submission.status == 'pending' and datetime.utcnow() > deadline_time:
+            submission.status = 'overdue'
+            db.session.commit()
+
+    return render_template('lecturer/view_assignment.html', assignment=assignment, submissions=submissions)
+
+@bp.route('/courses', methods=['GET', 'POST'])
+@login_required
+def manage_courses():
+    if not current_user.is_lecturer():
+        flash('Bạn không có quyền truy cập trang này.')
+        return redirect(url_for('main.index'))
+
+    form = CreateCourseForm()
+    if form.validate_on_submit():
+        course = Course(
+            name=form.name.data,
+            description=form.description.data,
+            lecturer_id=current_user.id
+        )
+        db.session.add(course)
+        db.session.commit()
+        flash('Khóa học đã được tạo thành công!')
+        return redirect(url_for('lecturer.manage_courses'))
+
+    courses = Course.query.filter_by(lecturer_id=current_user.id).all()
+    return render_template('lecturer/manage_courses.html', form=form, courses=courses)
+
+@bp.route('/course/<int:course_id>/videos', methods=['GET', 'POST'])
+@login_required
+def manage_videos(course_id):
+    course = Course.query.get_or_404(course_id)
+    if course.lecturer_id != current_user.id:
+        flash('Bạn không có quyền truy cập trang này.')
+        return redirect(url_for('main.index'))
+
+    form = UploadVideoForm()
+    if form.validate_on_submit():
+        video_file = form.video.data
+        video_path = os.path.join('app', 'static', 'videos', secure_filename(video_file.filename))
+        video_file.save(video_path)
+        video_url = f"videos/{secure_filename(video_file.filename)}"
+
+        video = LectureVideo(
+            title=form.title.data,
+            video_url=video_url,
+            course_id=course.id
+        )
+        db.session.add(video)
+        db.session.commit()
+        flash('Video đã được tải lên thành công!')
+        return redirect(url_for('lecturer.manage_videos', course_id=course.id))
+
+    videos = LectureVideo.query.filter_by(course_id=course.id).all()
+    return render_template('lecturer/manage_videos.html', form=form, course=course, videos=videos)

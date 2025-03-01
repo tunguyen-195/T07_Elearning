@@ -19,7 +19,17 @@
             {% for submission in submissions %}
             <tr>
                 <td>{{ submission.student.username }}</td>
-                <td>{{ submission.status }}</td>
+                <td>
+                    {% if submission.status == 'overdue' %}
+                        <span class="text-danger">Quá hạn</span>
+                    {% elif submission.status == 'submitted' %}
+                        Đã nộp
+                    {% elif submission.status == 'graded' %}
+                        Đã chấm
+                    {% else %}
+                        Chưa nộp
+                    {% endif %}
+                </td>
                 <td>
                     <input type="number" name="grades[{{ submission.id }}]" value="{{ submission.grade if submission.grade is not none else '' }}" class="form-control" min="0" max="100">
                 </td>

@@ -6,7 +6,14 @@
         <div class="card-header bg-primary text-white">
             <h2>{{ assignment.title }}</h2>
             <p class="mb-0"><strong>Hạn nộp:</strong> {{ assignment.due_date.strftime('%Y-%m-%d') }}</p>
-            <p class="mb-0"><strong>Trạng thái:</strong> {{ submission.status if submission else 'Chưa nộp' }}</p>
+            <p class="mb-0"><strong>Trạng thái:</strong> 
+                {% if submission.status == 'overdue' %}
+                    <span class="text-danger">Quá hạn</span>
+                {% else %}
+                    {{ submission.status if submission else 'Chưa nộp' }}
+                {% endif %}
+            </p>
+            <p class="mb-0"><strong>Thời gian còn lại:</strong> <span id="countdown"></span></p>
         </div>
         <div class="card-body">
             <div class="mb-4">
@@ -22,7 +29,7 @@
             <div class="mb-4">
                 {% if not submission or submission.status == 'pending' %}
                     <h4>Nộp bài tập</h4>
-                    <form method="POST" enctype="multipart/form-data" action="{{ url_for('student.submit_assignment', assignment_id=assignment.id) }}">
+                    <form method="POST" enctype="multipart/form-data" action="{{ url_for('student.submit_assignment', assignment_id=assignment.id) }}" id="submissionForm">
                         <div class="form-group">
                             <label for="file">Tải lên file đáp án:</label>
                             <input type="file" name="file" class="form-control" required>
@@ -57,4 +64,32 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Countdown timer
+    let remainingTime = {{ remaining_time|int }};
+    const countdownElement = document.getElementById('countdown');
+    const submissionForm = document.getElementById('submissionForm');
+
+    function updateCountdown() {
+        if (remainingTime <= 0) {
+            countdownElement.textContent = "Hết thời gian";
+            if (submissionForm) {
+                submissionForm.querySelector('button[type="submit"]').disabled = true;
+            }
+            return;
+        }
+
+        const hours = Math.floor(remainingTime / 3600);
+        const minutes = Math.floor((remainingTime % 3600) / 60);
+        const seconds = remainingTime % 60;
+
+        countdownElement.textContent = `${hours}h ${minutes}m ${seconds}s`;
+        remainingTime--;
+
+        setTimeout(updateCountdown, 1000);
+    }
+
+    updateCountdown();
+</script>
 {% endblock %} 

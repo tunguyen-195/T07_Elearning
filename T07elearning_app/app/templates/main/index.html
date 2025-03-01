@@ -2,22 +2,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome to the E-Learning Platform</h1>
-
-{% if current_user.is_authenticated %}
-    {% if current_user.is_lecturer() %}
-        <p>Welcome, Lecturer!</p>
-        <!-- Lecturer-specific content -->
-    {% elif current_user.is_student() %}
-        <p>Welcome, Student!</p>
-        <!-- Student-specific content -->
-    {% elif current_user.is_admin() %}
-        <p>Welcome, Admin!</p>
-        <!-- Admin-specific content -->
-    {% endif %}
-{% else %}
-    <p>Please log in to access your dashboard.</p>
-{% endif %}
 
 <!-- HERO SECTION -->
 <div class="p-5 mb-4 bg-hero text-white rounded-3 shadow-sm">
@@ -27,7 +11,7 @@
       Nền tảng học tập trực tuyến của Trường Đại học Kỹ thuật - Hậu cần CAND.<br>
       Tạo lớp học, tham gia khóa học, giám sát thực hành, chia sẻ tài liệu – tất cả trong một!
     </p>
-    <a href="{{ url_for('lecturer.create_assignment') }}" class="btn btn-hero btn-lg mt-3">Tạo Bài Tập</a>
+    <a href="http://127.0.0.1:8000/" class="btn btn-hero btn-lg mt-3">Tạo Phòng học</a>
     <a href="{{ url_for('main.join_class') }}" class="btn btn-secondary btn-lg mt-3">Tham Gia Lớp Học</a>
   </div>
 </div>
@@ -38,7 +22,7 @@
     <h2 class="text-center mb-4 text-t07 fw-bold">Tại sao chọn T07elearning?</h2>
     <div class="row">
       <!-- Card 1 -->
-      <div class="col-md-4 mb-4">
+      <div class="col-md-3 mb-4">
         <div class="card h-100 feature-card-t07 shadow-sm">
           <div class="card-body text-center">
             <i class="fas fa-chalkboard-teacher fs-2 text-t07 mb-3"></i>
@@ -47,14 +31,14 @@
               Tổ chức lớp học trực tuyến với video, slide, chia sẻ màn hình. 
               Giảng viên theo dõi và hỗ trợ học viên mọi lúc.
             </p>
-            <a href="http://127.0.0.1:8000/" class="btn btn-primary mt-3">
-              Tạo Lớp Học
+            <a href="{{ url_for('lecturer.create_class') }}" class="btn btn-primary mt-3">
+              Tạo Lớp
             </a>
           </div>
         </div>
       </div>
       <!-- Card 2 -->
-      <div class="col-md-4 mb-4">
+      <div class="col-md-3 mb-4">
         <div class="card h-100 feature-card-t07 shadow-sm">
           <div class="card-body text-center">
             <i class="fas fa-tasks fs-2 text-t07 mb-3"></i>
@@ -73,7 +57,7 @@
         </div>
       </div>
       <!-- Card 3 -->
-      <div class="col-md-4 mb-4">
+      <div class="col-md-3 mb-4">
         <div class="card h-100 feature-card-t07 shadow-sm">
           <div class="card-body text-center">
             <i class="fas fa-user-shield fs-2 text-t07 mb-3"></i>
@@ -82,6 +66,19 @@
               Xây dựng với tiêu chuẩn an ninh CAND, đảm bảo dữ liệu và thông tin cá nhân được bảo vệ.
             </p>
             <a href="#" class="btn btn-primary mt-3">Tìm Hiểu Thêm</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="col-md-3 mb-4">
+        <div class="card h-100 feature-card-t07 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-chalkboard fs-2 text-t07 mb-3"></i>
+            <h5 class="card-title fw-bold">Quản lý Khóa Học</h5>
+            <p class="card-text">
+              Tạo và quản lý các khóa học và video bài giảng của bạn.
+            </p>
+            <a href="{{ url_for('lecturer.manage_courses') }}" class="btn btn-primary mt-3">Quản lý Khóa Học</a>
           </div>
         </div>
       </div>

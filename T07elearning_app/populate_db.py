@@ -34,12 +34,18 @@ def populate():
         admin.roles.append(Role.query.filter_by(name='admin').first())
         db.session.add(admin)
     # Lecturer
-    lecturer = User.query.filter_by(username='lecturer1').first()
-    if not lecturer:
-        lecturer = User(username='lecturer1', email='lecturer1@example.com')
-        lecturer.set_password('123')
-        lecturer.roles.append(Role.query.filter_by(name='lecturer').first())
-        db.session.add(lecturer)
+    lecturer1 = User.query.filter_by(username='lecturer1').first()
+    if not lecturer1:
+        lecturer1 = User(username='lecturer1', email='lecturer1@example.com')
+        lecturer1.set_password('123')
+        lecturer1.roles.append(Role.query.filter_by(name='lecturer').first())
+        db.session.add(lecturer1)
+    lecturer2 = User.query.filter_by(username='lecturer2').first()
+    if not lecturer2:
+        lecturer2 = User(username='lecturer2', email='lecturer2@example.com')
+        lecturer2.set_password('123')
+        lecturer2.roles.append(Role.query.filter_by(name='lecturer').first())
+        db.session.add(lecturer2)
     # Students
     student1 = User.query.filter_by(username='student1').first()
     if not student1:
@@ -111,7 +117,9 @@ def populate():
             description='Complete the assignment.',
             due_date=datetime.utcnow() + timedelta(days=30),
             max_attempts=3,
-            created_on=datetime.utcnow()
+            created_on=datetime.utcnow(),
+            lecturer_id=lecturer1.id,
+            deadline_duration=60  # Set a default deadline duration in minutes
         )
         db.session.add(assignment)
     db.session.commit()

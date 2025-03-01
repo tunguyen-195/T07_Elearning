@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Quản lý Khóa Học</h1>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.name.label }} {{ form.name(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.description.label }} {{ form.description(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+
+<h2>Danh sách Khóa Học</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tên Khóa Học</th>
+            <th>Mô Tả</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for course in courses %}
+        <tr>
+            <td>{{ course.name }}</td>
+            <td>{{ course.description }}</td>
+            <td>
+                <a href="{{ url_for('lecturer.manage_videos', course_id=course.id) }}" class="btn btn-info btn-sm">Quản lý Video</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %} 

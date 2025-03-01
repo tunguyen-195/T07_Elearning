@@ -38,7 +38,7 @@ class User(UserMixin, db.Model):
     roles = db.relationship('Role', secondary='user_roles', back_populates='users')
 
     # Quan hệ với Course (giảng viên)
-    # courses = db.relationship('Course', backref='lecturer', lazy='dynamic')
+    courses = db.relationship('Course', backref='lecturer', lazy='dynamic')
 
     # Quan hệ với Enrollment (học viên)
     enrollments = db.relationship('Enrollment', backref='student', lazy='dynamic')
@@ -127,6 +127,12 @@ class Assignment(db.Model):
     max_attempts = db.Column(db.Integer, default=1)
     created_on = db.Column(db.DateTime, default=datetime.utcnow)
     attachment_url = db.Column(db.String(512), nullable=True)
+    
+    # New field to track the lecturer who created the assignment
+    lecturer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    # New field to store deadline duration in minutes
+    deadline_duration = db.Column(db.Integer, nullable=False, default=0)
 
     # Ensure the backref name does not conflict
     submissions = db.relationship('Submission', back_populates='assignment')
@@ -167,3 +173,32 @@ class Notification(db.Model):
 
     def __repr__(self):
         return f"<Notification User={self.user_id}, Read={self.is_read}>"
+
+
+# -------------- Model Course -------------- #
+class Course(db.Model):
+    __tablename__ = 'courses'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    created_on = db.Column(db.DateTime, default=datetime.utcnow)
+    lecturer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    videos = db.relationship('LectureVideo', back_populates='course')
+
+    def __repr__(self):
+        return f"<Course {self.name}>"
+
+
+# -------------- Model LectureVideo -------------- #
+class LectureVideo(db.Model):
+    __tablename__ = 'lecture_videos'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(128), nullable=False)
+    video_url = db.Column(db.String(512), nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False)
+
+    course = db.relationship('Course', back_populates='videos')
+
+    def __repr__(self):
+        return f"<LectureVideo {self.title}>"

@@ -10,6 +10,7 @@ class CreateAssignmentForm(FlaskForm):
     due_date = DateTimeField('Hạn nộp', format='%Y-%m-%d', validators=[DataRequired()])
     class_id = SelectField('Lớp', coerce=int, validators=[DataRequired()])
     attachment = FileField('Tệp đính kèm')
+    deadline_duration = IntegerField('Deadline Duration (minutes)', validators=[DataRequired()])
     submit = SubmitField('Tạo Bài Tập')
 
     def __init__(self, *args, **kwargs):
@@ -34,4 +35,14 @@ class CreateClassForm(FlaskForm):
 
 class EnrollStudentsForm(FlaskForm):
     submit = SubmitField('Thêm Sinh Viên')
+
+class CreateCourseForm(FlaskForm):
+    name = StringField('Tên Khóa Học', validators=[DataRequired()])
+    description = TextAreaField('Mô Tả')
+    submit = SubmitField('Tạo Khóa Học')
+
+class UploadVideoForm(FlaskForm):
+    title = StringField('Tên Video', validators=[DataRequired()])
+    video = FileField('Tệp Video', validators=[DataRequired()])
+    submit = SubmitField('Tải Lên Video')
 
