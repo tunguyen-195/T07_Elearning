@@ -20,9 +20,12 @@ def create_assignment():
     
     form = CreateAssignmentForm()
     if form.validate_on_submit():
+        print("Form validated successfully")  # Debugging line
+        # Initialize attachment_url
+        attachment_url = None
+
         # Handle file upload
         attachment = form.attachment.data
-        attachment_path = None
         if attachment:
             attachment_path = os.path.join('app', 'static', 'uploads', secure_filename(attachment.filename))
             attachment.save(attachment_path)
@@ -31,11 +34,11 @@ def create_assignment():
         assignment = Assignment(
             title=form.title.data,
             description=form.description.data,
-            due_date=form.due_date.data,  # Ensure this is a datetime object
+            due_date=form.due_date.data,
             class_id=form.class_id.data,
             attachment_url=attachment_url,
-            lecturer_id=current_user.id,  # Set the lecturer_id to the current user
-            class_link=form.class_link.data  # Save the class link
+            lecturer_id=current_user.id,
+            class_link=form.class_link.data
         )
         db.session.add(assignment)
         db.session.commit()
@@ -53,6 +56,11 @@ def create_assignment():
 
         flash('Bài tập đã được tạo và giao cho lớp thành công!')
         return redirect(url_for('lecturer.dashboard'))
+    else:
+        print("Form validation failed")  # Debugging line
+        for field, errors in form.errors.items():
+            for error in errors:
+                print(f"Error in {field}: {error}")  # Debugging line
     
     return render_template('lecturer/create_assignment.html', form=form)
 
@@ -185,7 +193,7 @@ def download_file(filename):
     upload_folder = os.path.join('app', 'static', 'uploads')
     return send_from_directory(upload_folder, filename, as_attachment=True)
 
-@bp.route('/view_assignment/<int:assignment_id>', methods=['GET'])
+@bp.route('/assignment/<int:assignment_id>', methods=['GET'])
 @login_required
 def view_assignment(assignment_id):
     assignment = Assignment.query.get_or_404(assignment_id)

@@ -185,3 +185,8 @@ body {
   height: auto;
   display: block;
 }
+
+/* Add this to your main.css */
+.class-link {
+  color: white;
+}

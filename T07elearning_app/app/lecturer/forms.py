@@ -1,8 +1,18 @@
 # app/lecturer/forms.py
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, DateField, IntegerField, DateTimeField, SelectField, FileField
-from wtforms.validators import DataRequired, Optional, URL
+from wtforms.validators import DataRequired, Optional, ValidationError
 from app.models import Class, Enrollment, Assignment, Submission, User
+import re
+
+def validate_url(form, field):
+    url = field.data
+    if not re.match(r'^(http|https)://', url):
+        url = 'http://' + url  # Add default scheme
+    field.data = url  # Update the field data with the complete URL
+    # Validate the URL format
+    if not re.match(r'^(http|https)://[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(/.*)?$', url):
+        raise ValidationError('Invalid URL format.')
 
 class CreateAssignmentForm(FlaskForm):
     title = StringField('Tiêu đề', validators=[DataRequired()])
@@ -11,7 +21,7 @@ class CreateAssignmentForm(FlaskForm):
     class_id = SelectField('Lớp', coerce=int, validators=[DataRequired()])
     attachment = FileField('Tệp đính kèm')
     deadline_duration = IntegerField('Deadline Duration (minutes)', validators=[DataRequired()])
-    class_link = StringField('Link Phòng Học', validators=[Optional(), URL()])
+    class_link = StringField('Link Phòng Học', validators=[Optional(), validate_url])
     submit = SubmitField('Tạo Bài Tập')
 
     def __init__(self, *args, **kwargs):

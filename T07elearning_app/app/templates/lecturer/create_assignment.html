@@ -13,15 +13,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Tạo Bài Tập</h1>
+    <div class="container mt-5">
+        <h1>Tạo Bài Tập Mới</h1>
         <form method="POST" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <div class="form-group">
                 {{ form.title.label }} {{ form.title(class="form-control") }}
             </div>
             <div class="form-group">
-                {{ form.description.label }} {{ form.description(class="form-control", rows=5) }}
+                {{ form.description.label }} {{ form.description(class="form-control") }}
             </div>
             <div class="form-group">
                 {{ form.due_date.label }} {{ form.due_date(class="form-control") }}
@@ -30,16 +30,15 @@
                 {{ form.class_id.label }} {{ form.class_id(class="form-control") }}
             </div>
             <div class="form-group">
-                {{ form.deadline_duration.label }} {{ form.deadline_duration(class="form-control") }}
+                {{ form.attachment.label }} {{ form.attachment(class="form-control-file") }}
             </div>
             <div class="form-group">
-                <label for="attachment">Tệp đính kèm:</label>
-                <input type="file" name="attachment" class="form-control">
+                {{ form.deadline_duration.label }} {{ form.deadline_duration(class="form-control") }}
             </div>
             <div class="form-group">
                 {{ form.class_link.label }} {{ form.class_link(class="form-control") }}
             </div>
-            <div class="form-group">
+            <div class="form-group mt-3">
                 {{ form.submit(class="btn btn-primary") }}
             </div>
         </form>

@@ -30,36 +30,41 @@ def populate():
     # Admin
     admin = User.query.filter_by(username='admin').first()
     if not admin:
-        admin = User(username='admin', email='admin@example.com')
-        admin.set_password('123')
+        admin = User(username='admin', email='admin@example.com', password_hash=generate_password_hash('123'))
         admin.roles.append(Role.query.filter_by(name='admin').first())
         db.session.add(admin)
     # Lecturer
     lecturer1 = User.query.filter_by(username='lecturer1').first()
     if not lecturer1:
-        lecturer1 = User(username='lecturer1', email='lecturer1@example.com')
-        lecturer1.set_password('123')
+        lecturer1 = User(username='lecturer1', email='lecturer1@example.com', password_hash=generate_password_hash('123'))
         lecturer1.roles.append(Role.query.filter_by(name='lecturer').first())
         db.session.add(lecturer1)
     lecturer2 = User.query.filter_by(username='lecturer2').first()
     if not lecturer2:
-        lecturer2 = User(username='lecturer2', email='lecturer2@example.com')
-        lecturer2.set_password('123')
+        lecturer2 = User(username='lecturer2', email='lecturer2@example.com', password_hash=generate_password_hash('123'))
         lecturer2.roles.append(Role.query.filter_by(name='lecturer').first())
         db.session.add(lecturer2)
+    lecturer3 = User.query.filter_by(username='lecturer3').first()
+    if not lecturer3:
+        lecturer3 = User(username='lecturer3', email='lecturer3@example.com', password_hash=generate_password_hash('123'))
+        lecturer3.roles.append(Role.query.filter_by(name='lecturer').first())
+        db.session.add(lecturer3)
     # Students
     student1 = User.query.filter_by(username='student1').first()
     if not student1:
-        student1 = User(username='student1', email='student1@example.com')
-        student1.set_password('123')
+        student1 = User(username='student1', email='student1@example.com', password_hash=generate_password_hash('123'))
         student1.roles.append(Role.query.filter_by(name='student').first())
         db.session.add(student1)
     student2 = User.query.filter_by(username='student2').first()
     if not student2:
-        student2 = User(username='student2', email='student2@example.com')
-        student2.set_password('123')
+        student2 = User(username='student2', email='student2@example.com', password_hash=generate_password_hash('123'))
         student2.roles.append(Role.query.filter_by(name='student').first())
         db.session.add(student2)
+    student3 = User.query.filter_by(username='student3').first()
+    if not student3:
+        student3 = User(username='student3', email='student3@example.com', password_hash=generate_password_hash('123'))
+        student3.roles.append(Role.query.filter_by(name='student').first())
+        db.session.add(student3)
     db.session.commit()
     print("Users created.")
 
@@ -68,10 +73,26 @@ def populate():
     if not class1:
         class1 = Class(
             name='Class 1',
-            description='Description for Class 1',
+            description='This is a sample class 1.',
             created_on=datetime.utcnow()
         )
         db.session.add(class1)
+    class2 = Class.query.filter_by(name='Class 2').first()
+    if not class2:
+        class2 = Class(
+            name='Class 2',
+            description='This is a sample class 2.',
+            created_on=datetime.utcnow()
+        )
+        db.session.add(class2)
+    class3 = Class.query.filter_by(name='Class 3').first()
+    if not class3:
+        class3 = Class(
+            name='Class 3',
+            description='This is a sample class 3.',
+            created_on=datetime.utcnow()
+        )
+        db.session.add(class3)
     db.session.commit()
     print("Classes created.")
 
@@ -92,65 +113,134 @@ def populate():
             enrolled_on=datetime.utcnow()
         )
         db.session.add(enrollment2)
+    enrollment3 = Enrollment.query.filter_by(student_id=student3.id, class_id=class2.id).first()
+    if not enrollment3:
+        enrollment3 = Enrollment(
+            student_id=student3.id,
+            class_id=class2.id,
+            enrolled_on=datetime.utcnow()
+        )
+        db.session.add(enrollment3)
+    enrollment4 = Enrollment.query.filter_by(student_id=student1.id, class_id=class3.id).first()
+    if not enrollment4:
+        enrollment4 = Enrollment(
+            student_id=student1.id,
+            class_id=class3.id,
+            enrolled_on=datetime.utcnow()
+        )
+        db.session.add(enrollment4)
+    enrollment5 = Enrollment.query.filter_by(student_id=student2.id, class_id=class3.id).first()
+    if not enrollment5:
+        enrollment5 = Enrollment(
+            student_id=student2.id,
+            class_id=class3.id,
+            enrolled_on=datetime.utcnow()
+        )
+        db.session.add(enrollment5)
     db.session.commit()
     print("Enrollments created.")
 
-    # Tạo buổi giảng (LectureSession)
-    lecture1 = LectureSession.query.filter_by(title='Lecture 1', class_id=class1.id).first()
-    if not lecture1:
-        lecture1 = LectureSession(
-            class_id=class1.id,
-            title='Lecture 1',
-            description='Introduction to the course.',
-            date=datetime.utcnow() + timedelta(days=1),
-            video_url='http://example.com/videos/lecture1'
-        )
-        db.session.add(lecture1)
-    db.session.commit()
-    print("Lecture sessions created.")
-
     # Tạo bài tập (Assignment)
-    assignment = Assignment.query.filter_by(title='Assignment 1', class_id=class1.id).first()
-    if not assignment:
-        assignment = Assignment(
-            class_id=class1.id,
+    assignment1 = Assignment.query.filter_by(title='Assignment 1', class_id=class1.id).first()
+    if not assignment1:
+        assignment1 = Assignment(
             title='Assignment 1',
-            description='Complete the assignment.',
-            due_date=datetime.utcnow() + timedelta(days=30),
-            max_attempts=3,
-            created_on=datetime.utcnow(),
+            description='This is assignment 1.',
+            due_date=datetime.utcnow() + timedelta(days=7),
+            class_id=class1.id,
             lecturer_id=lecturer1.id,
-            deadline_duration=60  # Set a default deadline duration in minutes
+            class_link='http://example.com/classroom1',
+            attachment_url=None
         )
-        db.session.add(assignment)
+        db.session.add(assignment1)
+    assignment2 = Assignment.query.filter_by(title='Assignment 2', class_id=class2.id).first()
+    if not assignment2:
+        assignment2 = Assignment(
+            title='Assignment 2',
+            description='This is assignment 2.',
+            due_date=datetime.utcnow() + timedelta(days=10),
+            class_id=class2.id,
+            lecturer_id=lecturer2.id,
+            class_link='http://example.com/classroom2',
+            attachment_url=None
+        )
+        db.session.add(assignment2)
+    assignment3 = Assignment.query.filter_by(title='Assignment 3', class_id=class3.id).first()
+    if not assignment3:
+        assignment3 = Assignment(
+            title='Assignment 3',
+            description='This is assignment 3.',
+            due_date=datetime.utcnow() + timedelta(days=5),
+            class_id=class3.id,
+            lecturer_id=lecturer3.id,
+            class_link='http://example.com/classroom3',
+            attachment_url=None
+        )
+        db.session.add(assignment3)
     db.session.commit()
     print("Assignments created.")
 
     # Tạo bài nộp (Submission)
-    submission1 = Submission.query.filter_by(assignment_id=assignment.id, student_id=student1.id).first()
+    submission1 = Submission.query.filter_by(assignment_id=assignment1.id, student_id=student1.id).first()
     if not submission1:
         submission1 = Submission(
-            assignment_id=assignment.id,
+            assignment_id=assignment1.id,
             student_id=student1.id,
             submission_date=datetime.utcnow(),
-            file_url='http://example.com/uploads/student1_assignment.zip',
+            file_url='http://example.com/uploads/student1_assignment1.zip',
             grade=85.0,
             feedback='Good job!',
             status='graded'
         )
         db.session.add(submission1)
-    submission2 = Submission.query.filter_by(assignment_id=assignment.id, student_id=student2.id).first()
+    submission2 = Submission.query.filter_by(assignment_id=assignment1.id, student_id=student2.id).first()
     if not submission2:
         submission2 = Submission(
-            assignment_id=assignment.id,
+            assignment_id=assignment1.id,
             student_id=student2.id,
             submission_date=datetime.utcnow(),
-            file_url='http://example.com/uploads/student2_assignment.zip',
+            file_url='http://example.com/uploads/student2_assignment1.zip',
             grade=90.0,
             feedback='Excellent work!',
             status='graded'
         )
         db.session.add(submission2)
+    submission3 = Submission.query.filter_by(assignment_id=assignment2.id, student_id=student3.id).first()
+    if not submission3:
+        submission3 = Submission(
+            assignment_id=assignment2.id,
+            student_id=student3.id,
+            submission_date=datetime.utcnow(),
+            file_url='http://example.com/uploads/student3_assignment2.zip',
+            grade=88.0,
+            feedback='Well done!',
+            status='graded'
+        )
+        db.session.add(submission3)
+    submission4 = Submission.query.filter_by(assignment_id=assignment3.id, student_id=student1.id).first()
+    if not submission4:
+        submission4 = Submission(
+            assignment_id=assignment3.id,
+            student_id=student1.id,
+            submission_date=datetime.utcnow(),
+            file_url='http://example.com/uploads/student1_assignment3.zip',
+            grade=92.0,
+            feedback='Great job!',
+            status='graded'
+        )
+        db.session.add(submission4)
+    submission5 = Submission.query.filter_by(assignment_id=assignment3.id, student_id=student2.id).first()
+    if not submission5:
+        submission5 = Submission(
+            assignment_id=assignment3.id,
+            student_id=student2.id,
+            submission_date=datetime.utcnow(),
+            file_url='http://example.com/uploads/student2_assignment3.zip',
+            grade=89.0,
+            feedback='Good effort!',
+            status='graded'
+        )
+        db.session.add(submission5)
     db.session.commit()
     print("Submissions created.")
 
@@ -179,8 +269,46 @@ def populate():
             is_read=False
         )
         db.session.add(notification2)
+    notification3 = Notification.query.filter_by(
+        user_id=student3.id,
+        message='Assignment 2 has been graded.'
+    ).first()
+    if not notification3:
+        notification3 = Notification(
+            user_id=student3.id,
+            message='Assignment 2 has been graded.',
+            created_on=datetime.utcnow(),
+            is_read=False
+        )
+        db.session.add(notification3)
+    notification4 = Notification.query.filter_by(
+        user_id=student1.id,
+        message='Assignment 3 has been graded.'
+    ).first()
+    if not notification4:
+        notification4 = Notification(
+            user_id=student1.id,
+            message='Assignment 3 has been graded.',
+            created_on=datetime.utcnow(),
+            is_read=False
+        )
+        db.session.add(notification4)
+    notification5 = Notification.query.filter_by(
+        user_id=student2.id,
+        message='Assignment 3 has been graded.'
+    ).first()
+    if not notification5:
+        notification5 = Notification(
+            user_id=student2.id,
+            message='Assignment 3 has been graded.',
+            created_on=datetime.utcnow(),
+            is_read=False
+        )
+        db.session.add(notification5)
     db.session.commit()
     print("Notifications created.")
+
+    print("Sample data created successfully.")
 
 def add_students():
     app = create_app()
