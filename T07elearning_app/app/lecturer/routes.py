@@ -8,6 +8,7 @@ from app.extensions import db
 import os
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
+import pandas as pd
 
 
 @bp.route('/assignment/create', methods=['GET', 'POST'])
@@ -83,12 +84,28 @@ def enroll_students(class_id):
     students = User.query.filter(User.roles.any(name='student'), User.username.contains(search_query)).all()
     
     form = EnrollStudentsForm()
-    if request.method == 'POST':
+
+    if form.validate_on_submit():
+        # Handle Excel file upload
+        if form.excel_file.data:
+            excel_file = form.excel_file.data
+            df = pd.read_excel(excel_file, engine='openpyxl')
+
+            # Assuming the Excel file has a column named 'username'
+            for index, row in df.iterrows():
+                username = row['username']
+                student = User.query.filter_by(username=username).first()
+                if student and not Enrollment.query.filter_by(student_id=student.id, class_id=class_id).first():
+                    enrollment = Enrollment(student_id=student.id, class_id=class_id)
+                    db.session.add(enrollment)
+
+        # Handle individual student selection
         student_ids = request.form.getlist('students')
         for student_id in student_ids:
             if not Enrollment.query.filter_by(student_id=student_id, class_id=class_id).first():
                 enrollment = Enrollment(student_id=student_id, class_id=class_id)
                 db.session.add(enrollment)
+
         db.session.commit()
         flash('Sinh viên đã được thêm vào lớp thành công!')
         return redirect(url_for('lecturer.dashboard'))

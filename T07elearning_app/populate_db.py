@@ -5,6 +5,7 @@ from app.models import (
     Role, User, Enrollment, LectureSession,
     Assignment, Submission, Notification, Class
 )
+from werkzeug.security import generate_password_hash
 
 def populate():
     # Tạo app context
@@ -181,5 +182,33 @@ def populate():
     db.session.commit()
     print("Notifications created.")
 
+def add_students():
+    app = create_app()
+    app.app_context().push()
+
+    # Ensure the 'student' role exists
+    student_role = Role.query.filter_by(name='student').first()
+    if not student_role:
+        student_role = Role(name='student')
+        db.session.add(student_role)
+        db.session.commit()
+
+    # Add 10 new students
+    for i in range(3, 13):  # Assuming student1 and student2 already exist
+        username = f'student{i}'
+        email = f'student{i}@example.com'
+        if not User.query.filter_by(username=username).first():
+            student = User(
+                username=username,
+                email=email,
+                password_hash=generate_password_hash('123')
+            )
+            student.roles.append(student_role)
+            db.session.add(student)
+
+    db.session.commit()
+    print("10 new students added to the database.")
+
 if __name__ == '__main__':
     populate()
+    add_students()

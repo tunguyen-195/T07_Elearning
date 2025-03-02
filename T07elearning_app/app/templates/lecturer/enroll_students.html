@@ -9,7 +9,7 @@
     <button type="submit">Tìm kiếm</button>
 </form>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <p>Chọn sinh viên để thêm vào lớp:</p>
     {% for student in students %}
@@ -18,6 +18,11 @@
             <label for="student-{{ student.id }}">{{ student.username }}</label>
         </div>
     {% endfor %}
-    <p>{{ form.submit() }}</p>
+    <div class="form-group mt-3">
+        {{ form.excel_file.label }} {{ form.excel_file(class="form-control") }}
+    </div>
+    <div class="form-group mt-3">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
 </form>
 {% endblock %}

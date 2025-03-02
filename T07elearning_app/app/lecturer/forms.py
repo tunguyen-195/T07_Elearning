@@ -34,6 +34,7 @@ class CreateClassForm(FlaskForm):
     submit = SubmitField('Tạo Lớp')
 
 class EnrollStudentsForm(FlaskForm):
+    excel_file = FileField('Tải lên Danh sách lớp - Excel', validators=[DataRequired()])
     submit = SubmitField('Thêm Sinh Viên')
 
 class CreateCourseForm(FlaskForm):
