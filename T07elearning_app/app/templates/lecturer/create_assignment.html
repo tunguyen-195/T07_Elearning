@@ -37,6 +37,9 @@
                 <input type="file" name="attachment" class="form-control">
             </div>
             <div class="form-group">
+                {{ form.class_link.label }} {{ form.class_link(class="form-control") }}
+            </div>
+            <div class="form-group">
                 {{ form.submit(class="btn btn-primary") }}
             </div>
         </form>

@@ -1,30 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Bảng điều khiển Giảng viên</h1>
-<p>Chào mừng đến với bảng điều khiển giảng viên. Tại đây, bạn có thể quản lý các lớp học và bài tập của mình.</p>
+<h1>Quản lý Lớp Học</h1>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Tên Lớp</th>
-            <th>Sinh Viên</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for data in class_student_data %}
-        <tr>
-            <td>{{ data.class.name }}</td>
-            <td>
-                <ul>
-                    {% for student in data.students %}
-                    <li>{{ student.username }}</li>
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+{% for class_ in classes %}
+<div class="card mb-3">
+    <div class="card-header">
+        <h5>{{ class_.name }}</h5>
+    </div>
+    <div class="card-body">
+        <p>{{ class_.description }}</p>
+        <a href="{{ url_for('lecturer.manage_class', class_id=class_.id) }}" class="btn btn-primary">Quản lý Sinh Viên</a>
+    </div>
+</div>
+{% endfor %}
 {% endblock %} 

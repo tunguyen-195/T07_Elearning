@@ -6,6 +6,9 @@
         <div class="card-header bg-primary text-white">
             <h2>{{ assignment.title }}</h2>
             <p class="mb-0"><strong>Hạn nộp:</strong> {{ assignment.due_date.strftime('%Y-%m-%d') }}</p>
+            {% if assignment.class_link %}
+            <p class="mb-0"><strong>Link Lớp Học:</strong> <a href="{{ assignment.class_link }}" target="_blank">{{ assignment.class_link }}</a></p>
+            {% endif %}
         </div>
         <div class="card-body">
             <h4>Danh sách nộp bài</h4>

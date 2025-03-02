@@ -1,7 +1,7 @@
 # app/lecturer/forms.py
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, DateField, IntegerField, DateTimeField, SelectField, FileField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Optional, URL
 from app.models import Class, Enrollment, Assignment, Submission, User
 
 class CreateAssignmentForm(FlaskForm):
@@ -11,6 +11,7 @@ class CreateAssignmentForm(FlaskForm):
     class_id = SelectField('Lớp', coerce=int, validators=[DataRequired()])
     attachment = FileField('Tệp đính kèm')
     deadline_duration = IntegerField('Deadline Duration (minutes)', validators=[DataRequired()])
+    class_link = StringField('Link Phòng Học', validators=[Optional(), URL()])
     submit = SubmitField('Tạo Bài Tập')
 
     def __init__(self, *args, **kwargs):

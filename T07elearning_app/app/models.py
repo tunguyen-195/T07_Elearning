@@ -74,11 +74,11 @@ class Class(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), nullable=False)
-    description = db.Column(db.Text)
+    description = db.Column(db.Text, nullable=True)
     created_on = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # Quan hệ với Enrollment
-    enrollments = db.relationship('Enrollment', backref='class', lazy='dynamic')
+    # Define the relationship to Enrollment
+    enrollments = db.relationship('Enrollment', back_populates='class_')
 
     # Quan hệ với Assignment
     assignments = db.relationship('Assignment', backref='class', lazy='dynamic')
@@ -95,6 +95,9 @@ class Enrollment(db.Model):
     student_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey('classes.id'), nullable=False)
     enrolled_on = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Define the relationship to Class
+    class_ = db.relationship('Class', back_populates='enrollments')
 
     def __repr__(self):
         return f"<Enrollment Student={self.student_id}, Class={self.class_id}>"
@@ -127,6 +130,7 @@ class Assignment(db.Model):
     max_attempts = db.Column(db.Integer, default=1)
     created_on = db.Column(db.DateTime, default=datetime.utcnow)
     attachment_url = db.Column(db.String(512), nullable=True)
+    class_link = db.Column(db.String(256), nullable=True)  # New field for class link
     
     # New field to track the lecturer who created the assignment
     lecturer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

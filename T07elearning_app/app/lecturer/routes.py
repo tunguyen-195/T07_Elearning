@@ -34,7 +34,8 @@ def create_assignment():
             due_date=form.due_date.data,  # Ensure this is a datetime object
             class_id=form.class_id.data,
             attachment_url=attachment_url,
-            lecturer_id=current_user.id  # Set the lecturer_id to the current user
+            lecturer_id=current_user.id,  # Set the lecturer_id to the current user
+            class_link=form.class_link.data  # Save the class link
         )
         db.session.add(assignment)
         db.session.commit()
@@ -112,24 +113,16 @@ def enroll_students(class_id):
     
     return render_template('lecturer/enroll_students.html', class_=class_, students=students, form=form)
 
-@bp.route('/dashboard', methods=['GET'])
+@bp.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
     if not current_user.is_lecturer():
         flash('Bạn không có quyền truy cập trang này.')
         return redirect(url_for('main.index'))
     
-    # Query all classes and their students
+    # Retrieve all classes without filtering by lecturer_id
     classes = Class.query.all()
-    class_student_data = []
-    for class_ in classes:
-        students = [enrollment.student for enrollment in class_.enrollments]
-        class_student_data.append({
-            'class': class_,
-            'students': students
-        })
-    
-    return render_template('lecturer/dashboard.html', class_student_data=class_student_data)
+    return render_template('lecturer/dashboard.html', classes=classes)
 
 @bp.route('/manage_assignments', methods=['GET'])
 @login_required
@@ -258,3 +251,25 @@ def manage_videos(course_id):
 
     videos = LectureVideo.query.filter_by(course_id=course.id).all()
     return render_template('lecturer/manage_videos.html', form=form, course=course, videos=videos)
+
+@bp.route('/class/manage/<int:class_id>', methods=['GET', 'POST'])
+@login_required
+def manage_class(class_id):
+    if not current_user.is_lecturer():
+        flash('Bạn không có quyền truy cập trang này.')
+        return redirect(url_for('main.index'))
+    
+    class_ = Class.query.get_or_404(class_id)
+    students = [enrollment.student for enrollment in class_.enrollments]
+
+    if request.method == 'POST':
+        student_ids = request.form.getlist('students')
+        for student_id in student_ids:
+            enrollment = Enrollment.query.filter_by(student_id=student_id, class_id=class_id).first()
+            if enrollment:
+                db.session.delete(enrollment)
+        db.session.commit()
+        flash('Sinh viên đã được xóa khỏi lớp thành công!')
+        return redirect(url_for('lecturer.manage_class', class_id=class_id))
+    
+    return render_template('lecturer/manage_class.html', class_=class_, students=students)

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Quản lý Lớp: {{ class_.name }}</h1>
+
+<form method="POST">
+    <p>Chọn sinh viên để xóa khỏi lớp:</p>
+    {% for student in students %}
+        <div>
+            <input type="checkbox" name="students" value="{{ student.id }}" id="student-{{ student.id }}">
+            <label for="student-{{ student.id }}">{{ student.username }}</label>
+        </div>
+    {% endfor %}
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-danger">Xóa Sinh Viên</button>
+    </div>
+</form>
+{% endblock %} 
