@@ -8,6 +8,7 @@ from app.extensions import db
 from werkzeug.utils import secure_filename
 import os
 from datetime import datetime, timedelta
+import logging
 
 @bp.route('/dashboard')
 @login_required
@@ -128,23 +129,29 @@ def view_assignment(assignment_id):
     deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
     remaining_time = (deadline_time - datetime.utcnow()).total_seconds()
 
+    # Debugging logs
+    logging.info(f"Assignment Created On: {assignment.created_on}")
+    logging.info(f"Deadline Time: {deadline_time}")
+    logging.info(f"Current UTC Time: {datetime.utcnow()}")
+    logging.info(f"Remaining Time (seconds): {remaining_time}")
+
     # Check if the submission is overdue
-    if remaining_time <= 0 and (not submission or submission.status == 'pending'):
-        if submission:
-            submission.status = 'overdue'
-        else:
-            submission = Submission(
-                assignment_id=assignment.id,
-                student_id=current_user.id,
-                submission_date=None,
-                file_url=None,
-                status='overdue',
-                feedback='',
-                grade=None,
-                answer=''
-            )
-            db.session.add(submission)
-        db.session.commit()
+    # if remaining_time <= 0 and (not submission or submission.status == 'pending'):
+    #     if submission:
+    #         submission.status = 'overdue'
+    #     else:
+    #         submission = Submission(
+    #             assignment_id=assignment.id,
+    #             student_id=current_user.id,
+    #             submission_date=None,
+    #             file_url=None,
+    #             status='overdue',
+    #             feedback='',
+    #             grade=None,
+    #             answer=''
+    #         )
+    #         db.session.add(submission)
+    #     db.session.commit()
 
     return render_template('student/view_assignment.html', assignment=assignment, submission=submission, remaining_time=remaining_time)
 
@@ -172,3 +179,14 @@ def view_videos(course_id):
     course = Course.query.get_or_404(course_id)
     videos = LectureVideo.query.filter_by(course_id=course.id).all()
     return render_template('student/view_videos.html', course=course, videos=videos)
+
+@bp.route('/course/<int:course_id>', methods=['GET'])
+@login_required
+def view_course_details(course_id):
+    if not current_user.is_student():
+        flash('Bạn không có quyền truy cập trang này.')
+        return redirect(url_for('main.index'))
+
+    course = Course.query.get_or_404(course_id)
+    videos = LectureVideo.query.filter_by(course_id=course.id).all()
+    return render_template('student/view_course_details.html', course=course, videos=videos)

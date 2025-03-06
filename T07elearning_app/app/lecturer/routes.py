@@ -9,6 +9,7 @@ import os
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import pandas as pd
+import logging
 
 
 @bp.route('/assignment/create', methods=['GET', 'POST'])
@@ -202,11 +203,19 @@ def view_assignment(assignment_id):
     # Calculate the deadline time
     deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
 
+    remaining_time = (deadline_time - datetime.utcnow()).total_seconds()
+
+    # Debugging logs
+    logging.debug(f"Assignment Created On: {assignment.created_on}")
+    logging.debug(f"Deadline Time: {deadline_time}")
+    logging.info(f"Current UTC Time: {datetime.utcnow()}")
+    logging.info(f"Remaining Time (seconds): {remaining_time}")
+
     # Update overdue status for each submission
-    for submission in submissions:
-        if submission.status == 'pending' and datetime.utcnow() > deadline_time:
-            submission.status = 'overdue'
-            db.session.commit()
+    # for submission in submissions:
+    #     if submission.status == 'pending' and datetime.utcnow() > deadline_time:
+    #         submission.status = 'overdue'
+    #         db.session.commit()
 
     return render_template('lecturer/view_assignment.html', assignment=assignment, submissions=submissions)
 
@@ -244,6 +253,10 @@ def manage_videos(course_id):
     if form.validate_on_submit():
         video_file = form.video.data
         video_path = os.path.join('app', 'static', 'videos', secure_filename(video_file.filename))
+        
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(video_path), exist_ok=True)
+        
         video_file.save(video_path)
         video_url = f"videos/{secure_filename(video_file.filename)}"
 

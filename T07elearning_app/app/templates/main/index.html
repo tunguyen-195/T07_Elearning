@@ -13,6 +13,9 @@
     </p>
     <a href="http://127.0.0.1:8000/" class="btn btn-hero btn-lg mt-3">Tạo Phòng học</a>
     <a href="{{ url_for('main.join_class') }}" class="btn btn-secondary btn-lg mt-3">Tham Gia Lớp Học</a>
+    {% if current_user.is_authenticated and current_user.is_student() %}
+    <a href="{{ url_for('student.view_courses') }}" class="btn btn-secondary btn-lg mt-3">Khóa Học Của Tôi</a>
+    {% endif %}
   </div>
 </div>
 
@@ -69,6 +72,7 @@
         </div>
       </div>
       <!-- Card 4 -->
+      {% if current_user.is_authenticated and current_user.is_lecturer() %}
       <div class="col-md-3 mb-4">
         <div class="card h-100 feature-card-t07 shadow-sm">
           <div class="card-body text-center">
@@ -81,6 +85,22 @@
           </div>
         </div>
       </div>
+      {% endif %}
+      <!-- Card 5 -->
+      {% if current_user.is_authenticated and current_user.is_student() %}
+      <div class="col-md-3 mb-4">
+        <div class="card h-100 feature-card-t07 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-book-open fs-2 text-t07 mb-3"></i>
+            <h5 class="card-title fw-bold">Khóa Học Của Tôi</h5>
+            <p class="card-text">
+              Xem và tham gia các khóa học của bạn.
+            </p>
+            <a href="{{ url_for('student.view_courses') }}" class="btn btn-primary mt-3">Xem Khóa Học</a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>
