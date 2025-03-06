@@ -1,53 +1,78 @@
-2025-03-02 11:07:45,715 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:07:48,022 INFO: Request: GET http://127.0.0.1:5000/lecturer/assignment/create [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:07:48,175 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:07:48,178 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:10:39,860 INFO: Server startup [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:32]
-2025-03-02 11:10:39,861 INFO: === Starting Socket.IO server === [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:49]
-2025-03-02 11:10:45,472 INFO: Request: GET http://127.0.0.1:5000/ [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:10:45,591 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:10:45,603 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:10:49,218 INFO: Request: GET http://127.0.0.1:5000/lecturer/assignment/create [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:10:49,287 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:10:49,304 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:10:57,615 INFO: Request: GET http://127.0.0.1:5000/auth/logout [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:10:57,624 INFO: Request: GET http://127.0.0.1:5000/index [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:10:57,674 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 11:10:57,678 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:10,102 INFO: Server startup [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:32]
-2025-03-02 21:28:10,104 INFO: === Starting Socket.IO server === [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:49]
-2025-03-02 21:28:17,635 INFO: Request: GET http://127.0.0.1:5000/ [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:17,705 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:17,766 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:19,976 INFO: Request: GET http://127.0.0.1:5000/auth/login [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:20,080 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:20,092 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:20,096 INFO: Request: GET http://127.0.0.1:5000/static/css/login.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:20,102 INFO: Request: GET http://127.0.0.1:5000/static/js/login.js [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:30,857 INFO: Request: GET http://127.0.0.1:5000/auth/login [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:30,912 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:30,921 INFO: Request: GET http://127.0.0.1:5000/static/js/login.js [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:30,924 INFO: Request: GET http://127.0.0.1:5000/static/css/login.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:30,932 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:36,188 INFO: Request: POST http://127.0.0.1:5000/auth/login [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:36,594 INFO: Request: GET http://127.0.0.1:5000/index [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:36,670 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:36,690 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:40,184 INFO: Request: GET http://127.0.0.1:5000/lecturer/dashboard [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:40,192 INFO: Request: GET http://127.0.0.1:5000/index [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:40,229 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:40,235 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:42,273 INFO: Request: GET http://127.0.0.1:5000/lecturer/class/create [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:42,282 INFO: Request: GET http://127.0.0.1:5000/index [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:42,336 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:42,339 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:44,062 INFO: Request: GET http://127.0.0.1:5000/auth/logout [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:44,070 INFO: Request: GET http://127.0.0.1:5000/index [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:44,113 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:44,116 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:46,572 INFO: Request: GET http://127.0.0.1:5000/auth/login [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:46,617 INFO: Request: GET http://127.0.0.1:5000/static/css/main.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:46,632 INFO: Request: GET http://127.0.0.1:5000/static/css/login.css [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:46,638 INFO: Request: GET http://127.0.0.1:5000/static/images/logo.png [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:46,641 INFO: Request: GET http://127.0.0.1:5000/static/js/login.js [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
-2025-03-02 21:28:55,278 INFO: Request: POST http://127.0.0.1:5000/auth/login [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,097 ERROR: Exception on /auth/signup [GET] [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/app/auth/routes.py", line 49, in register
+    return render_template('auth/register.html', form=form)  # Sửa ở đây
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/app/templates/auth/register.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/app/templates/base.html", line 75, in top-level template code
+    {% block content %}
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/app/templates/auth/register.html", line 15, in block 'content'
+    {{ form.email.label(class="form-label") }}
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/jinja2/environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'app.auth.forms.RegisterForm object' has no attribute 'email'
+2025-03-02 23:42:26,106 INFO: Request: GET http://127.0.0.1:5000/lecturer [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,108 INFO: Request: GET http://127.0.0.1:5000/ [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,112 INFO: Request: GET http://127.0.0.1:5000/ [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,116 INFO: Request: GET http://127.0.0.1:5000/auth [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,119 INFO: Request: GET http://127.0.0.1:5000/lecturer/class [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,122 INFO: Request: GET http://127.0.0.1:5000/index [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,124 INFO: Request: GET http://127.0.0.1:5000/lecturer/courses [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,128 INFO: Request: GET http://127.0.0.1:5000/auth/signup [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,130 ERROR: Exception on /auth/signup [GET] [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/app/auth/routes.py", line 49, in register
+    return render_template('auth/register.html', form=form)  # Sửa ở đây
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/app/templates/auth/register.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/app/templates/base.html", line 75, in top-level template code
+    {% block content %}
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/app/templates/auth/register.html", line 15, in block 'content'
+    {{ form.email.label(class="form-label") }}
+  File "/Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/venv/lib/python3.9/site-packages/jinja2/environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'app.auth.forms.RegisterForm object' has no attribute 'email'
+2025-03-02 23:42:26,136 INFO: Request: GET http://127.0.0.1:5000/lecturer/class/create [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,140 INFO: Request: GET http://127.0.0.1:5000/join_class [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,144 INFO: Request: GET http://127.0.0.1:5000/lecturer/dashboard [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,147 INFO: Request: GET http://127.0.0.1:5000/robots.txt [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,150 INFO: Request: GET http://127.0.0.1:5000/ [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,155 INFO: Request: GET http://127.0.0.1:5000/ [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,158 INFO: Request: GET http://127.0.0.1:5000/auth [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,160 INFO: Request: GET http://127.0.0.1:5000/lecturer/class [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,163 INFO: Request: GET http://127.0.0.1:5000/index [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,167 INFO: Request: GET http://127.0.0.1:5000/auth/login [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,174 INFO: Request: POST http://127.0.0.1:5000/auth/login [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
+2025-03-02 23:42:26,180 INFO: Request: GET http://127.0.0.1:5000/lecturer/courses [in /Users/nguyenminhtu/Workspace/Freelance/exam_app_D10_9.2024_ĐATN/T07Elearning/T07elearning_app/run.py:37]
