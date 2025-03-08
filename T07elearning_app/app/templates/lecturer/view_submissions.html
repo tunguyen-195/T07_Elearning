@@ -1,54 +1,89 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="container mt-5">
-    <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h2>{{ assignment.title }}</h2>
-            <p class="mb-0"><strong>Hạn nộp:</strong> {{ assignment.due_date.strftime('%Y-%m-%d') }}</p>
-            {% if assignment.class_link %}
-            <p class="mb-0"><strong>Link Phòng Học:</strong> <a href="{{ assignment.class_link }}" target="_blank" class="class-link">{{ assignment.class_link }}</a></p>
-            {% else %}
-            <p class="mb-0"><strong>Link Phòng Học:</strong> Không có link</p>
-            {% endif %}
-        </div>
-        <div class="card-body">
-            <h4>Danh sách nộp bài</h4>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Sinh Viên</th>
-                        <th>Trạng thái</th>
-                        <th>Điểm</th>
-                        <th>Phản hồi</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for submission in submissions %}
-                    <tr>
-                        <td>{{ submission.student.username }}</td>
-                        <td>
-                            {% if submission.status == 'overdue' %}
-                                <span class="text-danger">Quá hạn</span>
-                            {% else %}
-                                {{ submission.status }}
-                            {% endif %}
-                        </td>
-                        <td>{{ submission.grade if submission.grade is not none else 'Chưa chấm' }}</td>
-                        <td>{{ submission.feedback if submission.feedback else 'Chưa có phản hồi' }}</td>
-                        <td>
-                            {% if submission.file_url %}
-                                <a href="{{ url_for('static', filename=submission.file_url.replace('\\', '/')) }}" class="btn btn-primary btn-sm" download>Tải xuống</a>
-                            {% else %}
-                                Không có tệp
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h2>{{ assignment.title }}</h2>
+      <p class="mb-0">
+        <strong>Hạn nộp:</strong> {{ assignment.due_date.strftime('%Y-%m-%d') }}
+      </p>
+      {% if assignment.class_link %}
+      <p class="mb-0">
+        <strong>Link Phòng Học:</strong>
+        <a href="{{ assignment.class_link }}" target="_blank" class="class-link"
+          >{{ assignment.class_link }}</a
+        >
+      </p>
+      {% else %}
+      <p class="mb-0"><strong>Link Phòng Học:</strong> Không có link</p>
+      {% endif %}
     </div>
+    <div class="card-body">
+      <h4>Danh sách nộp bài</h4>
+      <form
+        method="POST"
+        action="{{ url_for('lecturer.grade_submissions', assignment_id=assignment.id) }}"
+      >
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Sinh Viên</th>
+              <th>Trạng thái</th>
+              <th>Điểm</th>
+              <th>Phản hồi</th>
+              <th>Câu trả lời</th>
+              <th>Tệp nộp</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for submission in submissions %}
+            <tr>
+              <td>{{ submission.student.username }}</td>
+              <td>
+                {% if submission.status == 'overdue' %}
+                <span class="text-danger">Quá hạn</span>
+                {% elif submission.status == 'submitted' %} Đã nộp {% elif
+                submission.status == 'graded' %} Đã chấm {% else %} Chưa nộp {%
+                endif %}
+              </td>
+              <td>
+                <input
+                  type="number"
+                  name="grades[{{ submission.id }}]"
+                  value="{{ submission.grade if submission.grade is not none else '' }}"
+                  class="form-control"
+                  min="0"
+                  max="100"
+                />
+              </td>
+              <td>
+                <textarea
+                  name="feedbacks[{{ submission.id }}]"
+                  class="form-control"
+                >
+{{ submission.feedback if submission.feedback else '' }}</textarea
+                >
+              </td>
+              <td>
+                {{ submission.answer if submission.answer else 'Chưa có câu trả
+                lời' }}
+              </td>
+              <td>
+                {% if submission.file_url %}
+                <a
+                  href="{{ url_for('static', filename=submission.file_url.replace('\\', '/')) }}"
+                  class="btn btn-primary btn-sm"
+                  download
+                  >Tải xuống</a
+                >
+                {% else %} Không có tệp {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <button type="submit" class="btn btn-success">Lưu Thay Đổi</button>
+      </form>
+    </div>
+  </div>
 </div>
-{% endblock %} 
+{% endblock %}

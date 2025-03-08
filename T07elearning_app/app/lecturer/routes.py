@@ -9,8 +9,10 @@ import os
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import pandas as pd
-import logging
 
+
+from datetime import datetime, timezone, timedelta
+import pytz
 
 @bp.route('/assignment/create', methods=['GET', 'POST'])
 @login_required
@@ -20,31 +22,47 @@ def create_assignment():
         return redirect(url_for('main.index'))
     
     form = CreateAssignmentForm()
+    
     if form.validate_on_submit():
-        print("Form validated successfully")  # Debugging line
-        # Initialize attachment_url
-        attachment_url = None
+        print("Form validated successfully")  # Debugging
 
-        # Handle file upload
+        # Kiểm tra giá trị due_date trước khi lưu
+        print(f"Due Date Submitted: {form.due_date.data}")  
+
+        # Xử lý tệp đính kèm (nếu có)
+        attachment_url = None
         attachment = form.attachment.data
         if attachment:
             attachment_path = os.path.join('app', 'static', 'uploads', secure_filename(attachment.filename))
             attachment.save(attachment_path)
             attachment_url = f"uploads/{secure_filename(attachment.filename)}"
 
+        # Nếu không có due_date, đặt mặc định là 7 ngày sau
+        if not form.due_date.data:
+            form.due_date.data = datetime.utcnow() + timedelta(days=7)
+            print(f"Due Date was empty, setting default: {form.due_date.data}")
+
+        # Chuyển due_date sang UTC để tránh lệch múi giờ
+        due_date_utc = form.due_date.data.replace(tzinfo=timezone.utc)
+        print(f"Due Date in UTC: {due_date_utc}")
+
+        # Tạo bài tập
         assignment = Assignment(
             title=form.title.data,
             description=form.description.data,
-            due_date=form.due_date.data,
+            due_date=due_date_utc,  # Sử dụng giá trị đã chuẩn hóa UTC
             class_id=form.class_id.data,
             attachment_url=attachment_url,
             lecturer_id=current_user.id,
-            class_link=form.class_link.data
+            class_link=form.class_link.data,
+            deadline_duration=form.deadline_duration.data  # Ensure this is saved
         )
         db.session.add(assignment)
         db.session.commit()
+        
+        print(f"Assignment Created with Due Date: {assignment.due_date}")  # Debugging
 
-        # Assign the assignment to all students in the class
+        # Giao bài tập cho học viên trong lớp
         class_ = Class.query.get(form.class_id.data)
         for enrollment in class_.enrollments:
             submission = Submission(
@@ -57,28 +75,36 @@ def create_assignment():
 
         flash('Bài tập đã được tạo và giao cho lớp thành công!')
         return redirect(url_for('lecturer.dashboard'))
+    
     else:
-        print("Form validation failed")  # Debugging line
+        print("Form validation failed")  # Debugging
         for field, errors in form.errors.items():
             for error in errors:
-                print(f"Error in {field}: {error}")  # Debugging line
+                print(f"Error in {field}: {error}")  # Debugging
     
     return render_template('lecturer/create_assignment.html', form=form)
+
 
 @bp.route('/class/create', methods=['GET', 'POST'])
 @login_required
 def create_class():
     if not current_user.is_lecturer():
-        flash('Bạn không có quyền truy cập trang này.')
+        flash('Bạn không có quyền truy cập trang này.', 'danger')
         return redirect(url_for('main.index'))
     
     form = CreateClassForm()
     if form.validate_on_submit():
-        new_class = Class(name=form.name.data, description=form.description.data)
-        db.session.add(new_class)
-        db.session.commit()
-        flash('Lớp học đã được tạo thành công!')
-        return redirect(url_for('lecturer.enroll_students', class_id=new_class.id))
+        # Kiểm tra xem lớp học đã tồn tại chưa
+        existing_class = Class.query.filter_by(name=form.name.data).first()
+        if existing_class:
+            flash('Tên lớp đã tồn tại. Vui lòng chọn tên khác.', 'warning')
+        else:
+            # Nếu tên lớp chưa tồn tại, tạo lớp mới
+            new_class = Class(name=form.name.data, description=form.description.data)
+            db.session.add(new_class)
+            db.session.commit()
+            flash('Lớp học đã được tạo thành công!', 'success')
+            return redirect(url_for('lecturer.enroll_students', class_id=new_class.id))
     
     return render_template('lecturer/create_class.html', form=form)
 
@@ -153,6 +179,19 @@ def view_submissions(assignment_id):
 
     assignment = Assignment.query.get_or_404(assignment_id)
     submissions = Submission.query.filter_by(assignment_id=assignment.id).all()
+
+    # Calculate the deadline time
+    if assignment.deadline_duration:
+        deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
+    else:
+        deadline_time = assignment.due_date
+
+    # Update overdue status for each submission
+    for submission in submissions:
+        if submission.status == 'pending' and datetime.utcnow() > deadline_time:
+            submission.status = 'overdue'
+            db.session.commit()
+
     return render_template('lecturer/view_submissions.html', assignment=assignment, submissions=submissions)
 
 @bp.route('/assignment/<int:assignment_id>/grade', methods=['POST'])
@@ -203,19 +242,11 @@ def view_assignment(assignment_id):
     # Calculate the deadline time
     deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
 
-    remaining_time = (deadline_time - datetime.utcnow()).total_seconds()
-
-    # Debugging logs
-    logging.debug(f"Assignment Created On: {assignment.created_on}")
-    logging.debug(f"Deadline Time: {deadline_time}")
-    logging.info(f"Current UTC Time: {datetime.utcnow()}")
-    logging.info(f"Remaining Time (seconds): {remaining_time}")
-
     # Update overdue status for each submission
-    # for submission in submissions:
-    #     if submission.status == 'pending' and datetime.utcnow() > deadline_time:
-    #         submission.status = 'overdue'
-    #         db.session.commit()
+    for submission in submissions:
+        if submission.status == 'pending' and datetime.utcnow() > deadline_time:
+            submission.status = 'overdue'
+            db.session.commit()
 
     return render_template('lecturer/view_assignment.html', assignment=assignment, submissions=submissions)
 
@@ -253,10 +284,6 @@ def manage_videos(course_id):
     if form.validate_on_submit():
         video_file = form.video.data
         video_path = os.path.join('app', 'static', 'videos', secure_filename(video_file.filename))
-        
-        # Ensure the directory exists
-        os.makedirs(os.path.dirname(video_path), exist_ok=True)
-        
         video_file.save(video_path)
         video_url = f"videos/{secure_filename(video_file.filename)}"
 

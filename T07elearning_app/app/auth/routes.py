@@ -1,11 +1,11 @@
 # app/auth/routes.py
 import logging
 from flask import render_template, redirect, url_for, flash, request, current_app as app
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from app.auth import bp
 from app import db
 from app.models import User
-from app.auth.forms import LoginForm, RegisterForm, ResetPasswordForm
+from app.auth.forms import LoginForm, RegisterForm, ResetPasswordForm, ChangePasswordForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # app/auth/routes.py
@@ -71,3 +71,17 @@ def logout():
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     return render_template('auth/signup.html')  # Đảm bảo template này tồn tại
+
+@bp.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        current_user.set_password(form.new_password.data)
+        db.session.commit()
+        flash('Mật khẩu của bạn đã được thay đổi thành công!', 'success')
+        return redirect(url_for('main.index'))
+    else:
+        if request.method == 'POST':
+            flash('Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin.', 'danger')
+    return render_template('auth/change_password.html', form=form)

@@ -1,28 +1,119 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div class="container py-5">
+  <h1 class="mb-4 text-center text-primary fw-bold">
+    Thêm Sinh Viên Vào Lớp: {{ class_.name }}
+  </h1>
 
-{% block content %}
-<h1>Thêm Sinh Viên Vào Lớp: {{ class_.name }}</h1>
+  <div class="card shadow-lg border-0 rounded-4 p-4 bg-white">
+    <!-- Form tìm kiếm sinh viên -->
+    <form
+      method="GET"
+      action="{{ url_for('lecturer.enroll_students', class_id=class_.id) }}"
+      class="mb-4"
+    >
+      <label class="form-label fw-semibold" for="search-student"
+        >Tìm kiếm sinh viên:</label
+      >
+      <div class="input-group">
+        <input
+          type="text"
+          id="search-student"
+          name="search"
+          class="form-control border-primary"
+          placeholder="Nhập tên sinh viên..."
+          value="{{ request.args.get('search', '') }}"
+          aria-label="Tìm kiếm sinh viên"
+        />
+        <button type="submit" class="btn btn-outline-primary shadow-sm px-4">
+          <i class="fas fa-search me-2"></i> Tìm kiếm
+        </button>
+      </div>
+    </form>
 
-<!-- Search Form -->
-<form method="GET" action="{{ url_for('lecturer.enroll_students', class_id=class_.id) }}">
-    <input type="text" name="search" placeholder="Tìm kiếm sinh viên" value="{{ request.args.get('search', '') }}">
-    <button type="submit">Tìm kiếm</button>
-</form>
+    <form method="POST" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
 
-<form method="POST" enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
-    <p>Chọn sinh viên để thêm vào lớp:</p>
-    {% for student in students %}
-        <div>
-            <input type="checkbox" name="students" value="{{ student.id }}" id="student-{{ student.id }}">
-            <label for="student-{{ student.id }}">{{ student.username }}</label>
+      <!-- Nhập danh sách từ file Excel -->
+      <div class="mb-4">
+        <label class="form-label fw-semibold" for="excel-file"
+          >Nhập danh sách từ file Excel:</label
+        >
+        <div class="input-group">
+          {{ form.excel_file(class="form-control border-primary",
+          id="excel-file") }}
+          <button
+            type="submit"
+            name="action"
+            value="import"
+            class="btn btn-primary shadow-sm px-4"
+          >
+            <i class="fas fa-file-import me-2"></i>Import
+          </button>
         </div>
-    {% endfor %}
-    <div class="form-group mt-3">
-        {{ form.excel_file.label }} {{ form.excel_file(class="form-control") }}
-    </div>
-    <div class="form-group mt-3">
-        {{ form.submit(class="btn btn-primary") }}
-    </div>
-</form>
+      </div>
+
+      <!-- Danh sách sinh viên -->
+      <div class="mb-4">
+        <label class="form-label fw-semibold"
+          >Chọn sinh viên để thêm vào lớp:</label
+        >
+        <div
+          class="border rounded-3 p-3 bg-light shadow-sm overflow-auto"
+          style="max-height: 300px"
+        >
+          {% for student in students %}
+          <div class="form-check p-2 rounded-3 select-effect">
+            <input
+              type="checkbox"
+              name="students"
+              value="{{ student.id }}"
+              id="student-{{ student.id }}"
+              class="form-check-input"
+            />
+            <label
+              for="student-{{ student.id }}"
+              class="form-check-label fw-medium w-100 text-start"
+            >
+              {{ student.username }}
+            </label>
+          </div>
+          {% else %}
+          <p class="text-muted text-center">
+            Không có sinh viên nào để hiển thị.
+          </p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Nút thêm sinh viên -->
+      <div class="text-center">
+        <button
+          type="submit"
+          name="action"
+          value="add_students"
+          class="btn btn-success px-5 py-2 shadow-lg rounded-pill"
+        >
+          <i class="fas fa-user-plus me-2"></i>Thêm sinh viên
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .select-effect:hover {
+    background-color: #f0f0f0 !important;
+    transition: background-color 0.3s ease-in-out;
+  }
+  .form-check-input:checked + .form-check-label {
+    background-color: #d6d6d6;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  .text-primary {
+    color: #0056b3 !important;
+  }
+</style>
 {% endblock %}

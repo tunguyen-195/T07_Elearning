@@ -23,7 +23,10 @@ def submit_assignment(assignment_id):
     submission = Submission.query.filter_by(assignment_id=assignment.id, student_id=current_user.id).first()
 
     # Calculate the deadline time
-    deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
+    if assignment.deadline_duration:
+        deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
+    else:
+        deadline_time = assignment.due_date
 
     # Check if the submission is late
     if datetime.utcnow() > deadline_time:
@@ -126,32 +129,35 @@ def view_assignment(assignment_id):
     submission = Submission.query.filter_by(assignment_id=assignment.id, student_id=current_user.id).first()
 
     # Calculate the deadline time
-    deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
+    # deadline_time = assignment.due_date  # Dùng trực tiếp due_date
+
+        # Calculate the deadline time
+    # deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
+
+    if assignment.deadline_duration:
+        deadline_time = assignment.created_on + timedelta(minutes=assignment.deadline_duration)
+    else:
+        deadline_time = assignment.due_date
+
     remaining_time = (deadline_time - datetime.utcnow()).total_seconds()
 
-    # Debugging logs
-    logging.info(f"Assignment Created On: {assignment.created_on}")
-    logging.info(f"Deadline Time: {deadline_time}")
-    logging.info(f"Current UTC Time: {datetime.utcnow()}")
-    logging.info(f"Remaining Time (seconds): {remaining_time}")
-
     # Check if the submission is overdue
-    # if remaining_time <= 0 and (not submission or submission.status == 'pending'):
-    #     if submission:
-    #         submission.status = 'overdue'
-    #     else:
-    #         submission = Submission(
-    #             assignment_id=assignment.id,
-    #             student_id=current_user.id,
-    #             submission_date=None,
-    #             file_url=None,
-    #             status='overdue',
-    #             feedback='',
-    #             grade=None,
-    #             answer=''
-    #         )
-    #         db.session.add(submission)
-    #     db.session.commit()
+    if remaining_time <= 0 and (not submission or submission.status == 'pending'):
+        if submission:
+            submission.status = 'overdue'
+        else:
+            submission = Submission(
+                assignment_id=assignment.id,
+                student_id=current_user.id,
+                submission_date=None,
+                file_url=None,
+                status='overdue',
+                feedback='',
+                grade=None,
+                answer=''
+            )
+            db.session.add(submission)
+        db.session.commit()
 
     return render_template('student/view_assignment.html', assignment=assignment, submission=submission, remaining_time=remaining_time)
 

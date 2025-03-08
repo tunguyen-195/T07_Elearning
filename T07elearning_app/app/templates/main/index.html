@@ -1,59 +1,101 @@
 <!-- app/templates/main/index.html -->
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <!-- HERO SECTION -->
 <div class="p-5 mb-4 bg-hero text-white rounded-3 shadow-sm">
   <div class="container py-5 text-center">
     <h1 class="display-5 fw-bold">Chào mừng đến với T07elearning</h1>
     <p class="fs-5 mt-3">
-      Nền tảng học tập trực tuyến của Trường Đại học Kỹ thuật - Hậu cần CAND.<br>
-      Tạo lớp học, tham gia khóa học, giám sát thực hành, chia sẻ tài liệu – tất cả trong một!
+      Nền tảng học tập trực tuyến của Trường Đại học Kỹ thuật - Hậu cần CAND.<br />
+      Tạo lớp học, tham gia khóa học, giám sát thực hành, chia sẻ tài liệu – tất
+      cả trong một!
     </p>
-    <a href="http://127.0.0.1:8000/" class="btn btn-hero btn-lg mt-3">Tạo Phòng học</a>
-    <a href="{{ url_for('main.join_class') }}" class="btn btn-secondary btn-lg mt-3">Tham Gia Lớp Học</a>
-    {% if current_user.is_authenticated and current_user.is_student() %}
-    <a href="{{ url_for('student.view_courses') }}" class="btn btn-secondary btn-lg mt-3">Khóa Học Của Tôi</a>
-    {% endif %}
+    {% if current_user.is_authenticated %} {% if current_user.is_lecturer() %}
+    <a href="http://192.168.135.88:8000/" class="btn btn-hero btn-lg mt-3"
+      >Tạo Phòng Học</a
+    >
+    {% elif current_user.is_student() %}
+    <a
+      href="{{ url_for('main.join_class') }}"
+      class="btn btn-secondary btn-lg mt-3"
+      >Tham Gia Lớp Học</a
+    >
+    {% elif current_user.is_admin() %}
+    <a href="{{ url_for('admin.index') }}" class="btn btn-primary btn-lg mt-3"
+      >Quản Lý Hệ Thống</a
+    >
+    {% endif %} {% endif %}
   </div>
 </div>
 
 <!-- FEATURES / LỢI ÍCH -->
 <section class="mb-5">
   <div class="container">
-    <h2 class="text-center mb-4 text-t07 fw-bold">Tại sao chọn T07elearning?</h2>
+    <h2 class="text-center mb-4 text-t07 fw-bold">
+      Tại sao chọn T07elearning?
+    </h2>
     <div class="row">
       <!-- Card 1 -->
       <div class="col-md-3 mb-4">
         <div class="card h-100 feature-card-t07 shadow-sm">
-          <div class="card-body text-center">
+          <div class="card-body d-flex flex-column text-center">
             <i class="fas fa-chalkboard-teacher fs-2 text-t07 mb-3"></i>
             <h5 class="card-title fw-bold">Giảng dạy tương tác</h5>
             <p class="card-text">
-              Tổ chức lớp học trực tuyến với video, slide, chia sẻ màn hình. 
+              Tổ chức lớp học trực tuyến với video, slide, chia sẻ màn hình.
               Giảng viên theo dõi và hỗ trợ học viên mọi lúc.
             </p>
-            <a href="{{ url_for('lecturer.dashboard') }}" class="btn btn-primary mt-3">Quản lý Lớp</a>
-            <a href="{{ url_for('lecturer.create_class') }}" class="btn btn-secondary mt-3">Tạo Lớp</a>
+            {% if current_user.is_authenticated and current_user.is_lecturer()
+            %}
+            <div class="mt-auto">
+              <a
+                href="{{ url_for('lecturer.create_class') }}"
+                class="btn btn-primary"
+                >Tạo Lớp Học</a
+              >
+              <a
+                href="{{ url_for('lecturer.dashboard') }}"
+                class="btn btn-secondary"
+                >Quản Lý Lớp</a
+              >
+            </div>
+            {% endif %}
           </div>
         </div>
       </div>
       <!-- Card 2 -->
       <div class="col-md-3 mb-4">
         <div class="card h-100 feature-card-t07 shadow-sm">
-          <div class="card-body text-center">
+          <div class="card-body d-flex flex-column text-center">
             <i class="fas fa-tasks fs-2 text-t07 mb-3"></i>
             <h5 class="card-title fw-bold">Quản lý bài tập</h5>
             <p class="card-text">
-              Giao bài, nộp bài trực tuyến, chấm điểm nhanh chóng. 
-              Học viên không bỏ lỡ deadline, giảng viên giảm gánh nặng.
+              Giao bài, nộp bài trực tuyến, chấm điểm nhanh chóng. Học viên
+              không bỏ lỡ deadline, giảng viên giảm gánh nặng.
             </p>
-            {% if current_user.is_authenticated and current_user.is_lecturer() %}
-            <a href="{{ url_for('lecturer.create_assignment') }}" class="btn btn-primary">Tạo Bài Tập</a>
-            <a href="{{ url_for('lecturer.manage_assignments') }}" class="btn btn-secondary">Quản lý Bài Tập</a>
-            {% elif current_user.is_authenticated and current_user.is_student() %}
-            <a href="{{ url_for('student.view_assignments') }}" class="btn btn-primary">Quản lý Bài Tập</a>
+            {% if current_user.is_authenticated and current_user.is_lecturer()
+            %}
+            <div class="mt-auto">
+              <a
+                href="{{ url_for('lecturer.create_assignment') }}"
+                class="btn btn-primary"
+                >Tạo Bài Tập</a
+              >
+              <a
+                href="{{ url_for('lecturer.manage_assignments') }}"
+                class="btn btn-secondary"
+                >Quản lý Bài Tập</a
+              >
+            </div>
+            {% elif current_user.is_authenticated and current_user.is_student()
+            %}
+            <div class="mt-auto">
+              <a
+                href="{{ url_for('student.view_assignments') }}"
+                class="btn btn-primary"
+                >Quản lý Bài Tập</a
+              >
+            </div>
             {% endif %}
           </div>
         </div>
@@ -61,42 +103,61 @@
       <!-- Card 3 -->
       <div class="col-md-3 mb-4">
         <div class="card h-100 feature-card-t07 shadow-sm">
-          <div class="card-body text-center">
+          <div class="card-body d-flex flex-column text-center">
             <i class="fas fa-user-shield fs-2 text-t07 mb-3"></i>
             <h5 class="card-title fw-bold">Bảo mật & An toàn</h5>
             <p class="card-text">
-              Xây dựng với tiêu chuẩn an ninh CAND, đảm bảo dữ liệu và thông tin cá nhân được bảo vệ.
+              Xây dựng với tiêu chuẩn an ninh CAND, đảm bảo dữ liệu và thông tin
+              cá nhân được bảo vệ.
             </p>
-            <a href="#" class="btn btn-primary mt-3">Tìm Hiểu Thêm</a>
+            {% if current_user.is_authenticated %}
+            <div class="mt-auto">
+              <a href="{{ url_for('main.rules') }}" class="btn btn-primary"
+                >Tìm Hiểu Thêm</a
+              >
+            </div>
+            {% endif %}
           </div>
         </div>
       </div>
-      <!-- Card 4 -->
-      {% if current_user.is_authenticated and current_user.is_lecturer() %}
+      {% if current_user.is_authenticated and not current_user.is_student() %}
       <div class="col-md-3 mb-4">
         <div class="card h-100 feature-card-t07 shadow-sm">
-          <div class="card-body text-center">
+          <div class="card-body d-flex flex-column text-center">
             <i class="fas fa-chalkboard fs-2 text-t07 mb-3"></i>
             <h5 class="card-title fw-bold">Quản lý Khóa Học</h5>
             <p class="card-text">
               Tạo và quản lý các khóa học và video bài giảng của bạn.
             </p>
-            <a href="{{ url_for('lecturer.manage_courses') }}" class="btn btn-primary mt-3">Quản lý Khóa Học</a>
+            {% if current_user.is_lecturer() %}
+            <div class="mt-auto">
+              <a
+                href="{{ url_for('lecturer.manage_courses') }}"
+                class="btn btn-primary"
+                >Quản lý Khóa Học</a
+              >
+            </div>
+            {% endif %}
           </div>
         </div>
       </div>
-      {% endif %}
-      <!-- Card 5 -->
-      {% if current_user.is_authenticated and current_user.is_student() %}
+      {% endif %} {% if current_user.is_authenticated and not
+      current_user.is_lecturer() %}
       <div class="col-md-3 mb-4">
         <div class="card h-100 feature-card-t07 shadow-sm">
-          <div class="card-body text-center">
+          <div class="card-body d-flex flex-column text-center">
             <i class="fas fa-book-open fs-2 text-t07 mb-3"></i>
             <h5 class="card-title fw-bold">Khóa Học Của Tôi</h5>
-            <p class="card-text">
-              Xem và tham gia các khóa học của bạn.
-            </p>
-            <a href="{{ url_for('student.view_courses') }}" class="btn btn-primary mt-3">Xem Khóa Học</a>
+            <p class="card-text">Xem và tham gia các khóa học của bạn.</p>
+            {% if current_user.is_student() %}
+            <div class="mt-auto">
+              <a
+                href="{{ url_for('student.view_courses') }}"
+                class="btn btn-primary"
+                >Xem Khóa Học</a
+              >
+            </div>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -104,5 +165,4 @@
     </div>
   </div>
 </section>
-
 {% endblock %}

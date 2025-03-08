@@ -14,4 +14,4 @@ class Config:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SOCKETIO_MESSAGE_QUEUE = os.environ.get('SOCKETIO_MESSAGE_QUEUE') or 'redis://'
     UPLOAD_FOLDER = os.path.join('app', 'static', 'uploads')
-    MAX_CONTENT_LENGTH = 1000 * 1024 * 1024  # Set to 100 MB, adjust as needed
+    MAX_CONTENT_LENGTH = 1000 * 1024 * 1024  # Limit upload size to 16MB

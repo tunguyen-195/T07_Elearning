@@ -1,18 +1,69 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div class="container py-5">
+  <h1 class="mb-4 text-center fw-bold text-deepblue">
+    Quản lý Lớp: {{ class_.name }}
+  </h1>
 
-{% block content %}
-<h1>Quản lý Lớp: {{ class_.name }}</h1>
+  <div class="card shadow-lg border-0 rounded-4 p-4 bg-white">
+    <form method="POST">
+      <h4 class="mb-3 text-dark fw-semibold">
+        Chọn sinh viên để xóa khỏi lớp:
+      </h4>
 
-<form method="POST">
-    <p>Chọn sinh viên để xóa khỏi lớp:</p>
-    {% for student in students %}
-        <div>
-            <input type="checkbox" name="students" value="{{ student.id }}" id="student-{{ student.id }}">
-            <label for="student-{{ student.id }}">{{ student.username }}</label>
+      <div
+        class="border rounded-3 p-3 bg-light shadow-sm overflow-auto"
+        style="max-height: 300px"
+      >
+        {% for student in students %}
+        <div
+          class="form-check d-flex align-items-center p-2 rounded-3 hover-bg-light select-effect"
+        >
+          <input
+            type="checkbox"
+            name="students"
+            value="{{ student.id }}"
+            id="student-{{ student.id }}"
+            class="form-check-input me-2"
+          />
+          <label
+            for="student-{{ student.id }}"
+            class="form-check-label fw-medium w-100 text-start"
+          >
+            {{ student.username }}
+          </label>
         </div>
-    {% endfor %}
-    <div class="form-group mt-3">
-        <button type="submit" class="btn btn-danger">Xóa Sinh Viên</button>
-    </div>
-</form>
-{% endblock %} 
+        {% endfor %}
+      </div>
+
+      <div class="text-center mt-4">
+        <button
+          type="submit"
+          class="btn btn-danger px-5 py-2 shadow-lg rounded-pill"
+        >
+          <i class="fas fa-user-minus me-2"></i>Xóa Sinh Viên
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .text-deepblue {
+    color: #004085 !important;
+  }
+  .hover-bg-light:hover {
+    background-color: #f8d7da !important;
+    transition: background-color 0.3s ease-in-out;
+  }
+  .transition {
+    transition: all 0.3s ease;
+  }
+  .select-effect input:checked + label {
+    background-color: #f5c6cb;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+</style>
+{% endblock %}

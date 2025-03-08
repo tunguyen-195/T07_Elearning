@@ -1,0 +1,135 @@
+{% extends "base.html" %} {% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h1 class="title-text">📜 Quy định sử dụng phần mềm</h1>
+    <p class="subtitle-text">
+      Tuân thủ quy định để tạo môi trường học tập chuyên nghiệp, an toàn và hiệu
+      quả.
+    </p>
+  </div>
+
+  <div class="rules-container">
+    <p class="intro-text">
+      Chào mừng bạn đến với nền tảng <strong>T07elearning</strong>. Để đảm bảo
+      chất lượng học tập và bảo vệ quyền lợi của tất cả người dùng, vui lòng
+      tuân thủ các quy định sau:
+    </p>
+    <ul class="rule-list">
+      <li class="rule-item">
+        🔑 <strong>Bảo mật tài khoản cá nhân.</strong> Không chia sẻ tài khoản,
+        mật khẩu với bất kỳ ai. Mọi hành vi truy cập trái phép sẽ bị xử lý
+        nghiêm.
+      </li>
+      <li class="rule-item">
+        📘 <strong>Sử dụng phần mềm đúng mục đích.</strong> Chỉ phục vụ học tập,
+        nghiên cứu. Không sử dụng cho mục đích thương mại hoặc hành vi trái pháp
+        luật.
+      </li>
+      <li class="rule-item">
+        📂 <strong>Chia sẻ tài liệu có trách nhiệm.</strong> Tôn trọng bản
+        quyền, không phát tán tài liệu học tập khi chưa được cho phép.
+      </li>
+      <li class="rule-item">
+        🔐 <strong>Đảm bảo an toàn thông tin.</strong> Không đăng tải, phát tán
+        phần mềm độc hại, tài liệu có nội dung vi phạm đạo đức hoặc pháp luật.
+      </li>
+      <li class="rule-item">
+        💬 <strong>Giao tiếp lịch sự và văn minh.</strong> Tôn trọng giảng viên,
+        bạn học; không spam, không sử dụng ngôn từ xúc phạm.
+      </li>
+      <li class="rule-item">
+        ⏳ <strong>Tham gia đầy đủ và đúng giờ.</strong> Tránh vắng mặt trong
+        các buổi học, thực hiện bài tập đúng thời hạn.
+      </li>
+      <li class="rule-item">
+        🚨 <strong>Báo cáo vi phạm.</strong> Nếu phát hiện hành vi sai phạm, hãy
+        báo cáo ngay để đảm bảo công bằng và an toàn cho hệ thống.
+      </li>
+    </ul>
+  </div>
+
+  <div class="text-center mt-4 contact-info">
+    <p>
+      📧 Nếu cần hỗ trợ, vui lòng liên hệ:
+      <span class="highlight-text">Cao Hồng Lam - 0904315082</span>.
+    </p>
+  </div>
+</div>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+  .title-text {
+    font-size: 2.5rem;
+    color: #002f6c;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .subtitle-text {
+    font-size: 1.2rem;
+    color: #555;
+    font-weight: 400;
+    margin-top: 5px;
+  }
+
+  .rules-container {
+    background: #f9fbff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    color: #d9534f;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .rule-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .rule-item {
+    font-size: 1rem;
+    color: #002f6c;
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .rule-item:hover {
+    background: #e3eaf6;
+    transform: translateY(-3px);
+  }
+
+  .contact-info {
+    margin-top: 25px;
+    font-size: 1rem;
+    color: #002f6c;
+    font-weight: 500;
+  }
+
+  .highlight-text {
+    font-weight: bold;
+    color: #d9534f;
+  }
+
+  body {
+    background: #ffffff;
+    color: #333;
+    font-family: "Poppins", sans-serif;
+  }
+</style>
+{% endblock %}

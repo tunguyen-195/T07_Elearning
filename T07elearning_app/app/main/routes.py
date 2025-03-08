@@ -14,7 +14,7 @@ def index():
 @login_required
 def create_class():
     # Chỉ cho phép lecturer hoặc admin
-    if not (current_user.is_lecturer() or current_user.is_admin()):
+    if not (current_user.is_lecturer()):
         flash("Bạn không có quyền tạo phòng học", "danger")
         return redirect(url_for('main.index'))
     
@@ -58,3 +58,7 @@ def room(meeting_slug):
     """
     meet = Meeting.query.filter_by(meeting_slug=meeting_slug).first_or_404()
     return render_template('classroom/classroom.html', meeting=meet)
+@bp.route("/rules")
+@login_required
+def rules():
+    return render_template("main/rules.html")
