@@ -1,6 +1,6 @@
 # app/lecturer/forms.py
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, DateField, IntegerField, DateTimeField, SelectField, FileField
+from wtforms import StringField, TextAreaField, SubmitField, DateField, IntegerField, DateTimeField, SelectField, FileField, SelectMultipleField
 from wtforms.validators import DataRequired, Optional, ValidationError
 from app.models import Class, Enrollment, Assignment, Submission, User
 import re
@@ -55,7 +55,12 @@ class EnrollStudentsForm(FlaskForm):
 class CreateCourseForm(FlaskForm):
     name = StringField('Tên Khóa Học', validators=[DataRequired()])
     description = TextAreaField('Mô Tả')
+    classes = SelectMultipleField('Chọn Lớp', coerce=int, validators=[DataRequired()])
     submit = SubmitField('Tạo Khóa Học')
+
+    def __init__(self, *args, **kwargs):
+        super(CreateCourseForm, self).__init__(*args, **kwargs)
+        self.classes.choices = [(cls.id, cls.name) for cls in Class.query.all()]
 
 class UploadVideoForm(FlaskForm):
     title = StringField('Tên Video', validators=[DataRequired()])

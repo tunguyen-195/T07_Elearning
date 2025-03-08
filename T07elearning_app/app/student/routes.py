@@ -194,5 +194,14 @@ def view_course_details(course_id):
         return redirect(url_for('main.index'))
 
     course = Course.query.get_or_404(course_id)
+    
+    # Check if the student is enrolled in any class associated with the course
+    enrolled_classes = [enrollment.class_id for enrollment in current_user.enrollments]
+    course_classes = [cls.id for cls in course.classes]
+
+    if not any(cls_id in enrolled_classes for cls_id in course_classes):
+        flash('Bạn không có quyền truy cập khóa học này.', 'danger')
+        return redirect(url_for('student.view_courses'))
+
     videos = LectureVideo.query.filter_by(course_id=course.id).all()
     return render_template('student/view_course_details.html', course=course, videos=videos)

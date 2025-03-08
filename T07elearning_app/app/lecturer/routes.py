@@ -264,6 +264,10 @@ def manage_courses():
             description=form.description.data,
             lecturer_id=current_user.id
         )
+        # Add selected classes to the course
+        selected_classes = Class.query.filter(Class.id.in_(form.classes.data)).all()
+        course.classes.extend(selected_classes)
+
         db.session.add(course)
         db.session.commit()
         flash('Khóa học đã được tạo thành công!')

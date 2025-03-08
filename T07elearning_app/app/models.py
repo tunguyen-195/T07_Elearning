@@ -189,6 +189,7 @@ class Course(db.Model):
     lecturer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     videos = db.relationship('LectureVideo', back_populates='course')
+    classes = db.relationship('Class', secondary='course_classes', backref=db.backref('courses', lazy='dynamic'))
 
     def __repr__(self):
         return f"<Course {self.name}>"
@@ -206,3 +207,8 @@ class LectureVideo(db.Model):
 
     def __repr__(self):
         return f"<LectureVideo {self.title}>"
+
+course_classes = db.Table('course_classes',
+    db.Column('course_id', db.Integer, db.ForeignKey('courses.id'), primary_key=True),
+    db.Column('class_id', db.Integer, db.ForeignKey('classes.id'), primary_key=True)
+)

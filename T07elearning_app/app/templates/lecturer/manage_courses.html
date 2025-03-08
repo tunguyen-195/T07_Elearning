@@ -12,6 +12,10 @@
         {{ form.description.label }} {{ form.description(class="form-control") }}
     </div>
     <div class="form-group">
+        {{ form.classes.label }}
+        {{ form.classes(class="form-control", multiple=True) }}
+    </div>
+    <div class="form-group">
         {{ form.submit(class="btn btn-primary") }}
     </div>
 </form>
@@ -22,6 +26,7 @@
         <tr>
             <th>Tên Khóa Học</th>
             <th>Mô Tả</th>
+            <th>Lớp</th>
             <th>Hành động</th>
         </tr>
     </thead>
@@ -30,6 +35,7 @@
         <tr>
             <td>{{ course.name }}</td>
             <td>{{ course.description }}</td>
+            <td>{{ course.classes|map(attribute='name')|join(', ') }}</td>
             <td>
                 <a href="{{ url_for('lecturer.manage_videos', course_id=course.id) }}" class="btn btn-info btn-sm">Quản lý Video</a>
             </td>
